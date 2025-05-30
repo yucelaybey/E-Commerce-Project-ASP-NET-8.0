@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ödeme - E-Ticaret</title>
+    <link rel="stylesheet" href="payment.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="amazon_logo.png" alt="E-Ticaret Logo">
+        </div>
+        <h1>Ödeme</h1>
+    </header>
+
+    <main class="payment-container">
+        <section class="payment-methods">
+            <h2>Kayıtlı Kartlar</h2>
+            <div class="saved-cards">
+                <div class="card">
+                    <input type="radio" name="card" id="card1" class="card-radio" checked>
+                    <label for="card1" class="card-label">**** **** **** 1234</label>
+                </div>
+                <div class="card">
+                    <input type="radio" name="card" id="card2" class="card-radio">
+                    <label for="card2" class="card-label">**** **** **** 5678</label>
+                </div>
+            </div>
+            <button class="add-card-btn" id="add-card-btn">Yeni Kart Ekle</button>
+        </section>
+
+        <aside class="order-summary">
+            <h2>Sipariş Özeti</h2>
+            <div class="summary-item">
+                <span>Ürün Toplamı</span>
+                <span class="total-price">₺250.00</span>
+            </div>
+            <div class="summary-item">
+                <span>Kargo Ücreti</span>
+                <span class="shipping-fee">₺44.90</span>
+            </div>
+            <div class="summary-item discount">
+                <span>250 TL ve Üzeri Kargo Bedava (Satıcı Karşılar)</span>
+                <span class="discount-amount">-₺44.90</span>
+            </div>
+            <div class="summary-item grand-total">
+                <span>Toplam</span>
+                <span class="grand-total-price">₺250.00</span>
+            </div>
+            <button class="checkout-btn">Ödeme Yap</button>
+        </aside>
+    </main>
+
+    <!-- Yeni Kart Ekleme Modalı -->
+    <div class="modal" id="add-card-modal">
+        <div class="modal-content">
+            <span class="close-modal" id="close-modal">&times;</span>
+            <h2>Yeni Kart Ekle</h2>
+            <form id="card-form">
+                <div class="form-group">
+                    <label for="card-number">Kart Numarası</label>
+                    <input type="text" id="card-number" placeholder="0000 0000 0000 0000" maxlength="19" required>
+                </div>
+                <div class="form-group">
+                    <label for="card-expiry">Son Kullanma Tarihi (AA/YY)</label>
+                    <input type="text" id="card-expiry" placeholder="AA/YY" maxlength="5" required>
+                </div>
+                <div class="form-group">
+                    <label for="card-cvv">CVV</label>
+                    <input type="text" id="card-cvv" placeholder="000" maxlength="3" required>
+                </div>
+                <button type="submit" class="submit-btn">Kartı Kaydet</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Hakkımızda</h3>
+                <p>Şirketimiz 2000 yılından beri kaliteli ürünler sunmaktadır.</p>
+            </div>
+            <div class="footer-section">
+                <h3>İletişim</h3>
+                <p>Email: info@example.com</p>
+                <p>Telefon: +90 123 456 78 90</p>
+            </div>
+            <div class="footer-section">
+                <h3>Sosyal Medya</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Tüm Hakları Saklıdır.</p>
+        </div>
+    </footer>
+
+    <script src="payment.js"></script>
+</body>
+</html>

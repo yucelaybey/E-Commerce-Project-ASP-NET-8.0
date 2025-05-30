@@ -1,0 +1,24 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+
+@await Component.InvokeAsync("_HeadAdminComponentPartial")
+
+<body>
+
+    @await Component.InvokeAsync("_HeaderAdminComponentPartial")
+
+    @await Component.InvokeAsync("_SideBarAdminComponentPartial")
+
+    <!-- Overlay -->
+    <div class="overlay"></div>
+
+    @RenderBody()
+
+    <script src="~/js/general.js"></script>
+</body>
+</html>

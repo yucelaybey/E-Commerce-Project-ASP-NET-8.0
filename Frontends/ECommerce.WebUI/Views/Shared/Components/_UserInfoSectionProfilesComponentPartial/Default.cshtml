@@ -1,0 +1,56 @@
+﻿@model UserProfileDto
+<!-- User Info Section -->
+<section class="user-info-section">
+    <div class="section-header">
+        <h2><i class="fas fa-user-circle"></i> Kişisel Bilgilerim</h2>
+        <button class="edit-btn" id="editProfileBtn"><i class="fas fa-edit"></i> Düzenle</button>
+    </div>
+    <div class="user-info-grid">
+        <div class="info-item">
+            <label>Ad Soyad</label>
+            <p id="userFullName">@Model.NameSurname</p>
+        </div>
+        <div class="info-item">
+            <label>E-posta</label>
+            <p id="userEmail">
+                @Model.Email
+                @if (Model.EmailCheck)
+                {
+                    <span class="verified-badge">
+                        <i class="fas fa-check-circle"></i>Doğrulanmış
+                    </span>
+                }
+                else
+                {
+                    <span class="not-verified-badge"><i class="fas fa-xmark"></i>Doğrulanmamış </span>
+                }
+            </p>
+                    
+        </div>
+        <div class="info-item">
+            <label>Telefon</label>
+            <p id="userPhone">@FormatPhone(Model.PhoneNumber)</p>
+        </div>
+        <div class="info-item">
+            <label>Doğum Tarihi</label>
+            <p id="userBirthDate">@Model.BirtDay.ToShortDateString()</p>
+        </div>
+        <div class="info-item">
+            <label>Şifre</label>
+            <p>•••••••• <button class="change-password-btn" id="changePasswordBtn">Şifreyi Değiştir</button></p>
+        </div>
+    </div>
+</section>
+
+@{
+    string FormatPhone(string phone)
+    {
+        if (string.IsNullOrEmpty(phone)) return phone;
+        phone = phone.Replace("+90", "").Trim();
+        if (phone.Length == 10)
+        {
+            return $"+90 {phone.Substring(0, 3)} {phone.Substring(3, 3)} {phone.Substring(6)}";
+        }
+        return $"+90 {phone}";
+    }
+}

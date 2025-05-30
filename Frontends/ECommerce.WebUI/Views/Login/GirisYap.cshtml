@@ -1,0 +1,57 @@
+﻿@model CreateLoginDto
+@{
+    ViewData["Title"] = "GirisYap";
+    Layout = "~/Views/UILayout/UILoginLayout.cshtml";
+}
+
+<div class="auth-container">
+    <h2><i class="fas fa-sign-in-alt"></i> Giriş Yap</h2>
+    <form class="auth-form" method="post">
+        <!-- Validation Summary -->
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="input-group">
+            <input type="email" placeholder="E-posta" id="loginEmail" asp-for="Email" required>
+            <i class="fas fa-envelope"></i>
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="input-group">
+            <input type="password" placeholder="Şifre" id="loginPassword" asp-for="Password" required>
+            <i class="fas fa-lock toggle-password" onclick="togglePassword()"></i>
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="form-options">
+            <div class="form-group form-check">
+                <input asp-for="RememberMe" class="form-check-input" />
+                <label asp-for="RememberMe" class="form-check-label">Beni Hatırla</label>
+            </div>
+            <a href="/Login/SifremiUnuttum">Şifremi Unuttum</a>
+        </div>
+        <button type="submit">Giriş Yap <i class="fas fa-arrow-right"></i></button>
+        <div class="social-login">
+            <p>Hızlı Giriş Yap:</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-google"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-apple"></i></a>
+            </div>
+        </div>
+        <p class="switch-text">Hesabın yok mu? <a href="/Login/KayitOl">Kayıt Ol</a></p>
+    </form>
+</div>
+
+<script>
+    function togglePassword() {
+        const passwordField = document.getElementById('loginPassword');
+        const toggleIcon = document.querySelector('.toggle-password');
+        if (passwordField.type === 'password') {
+            passwordField.type = 'text';
+            toggleIcon.classList.remove('fa-lock');
+            toggleIcon.classList.add('fa-unlock');
+        } else {
+            passwordField.type = 'password';
+            toggleIcon.classList.remove('fa-unlock');
+            toggleIcon.classList.add('fa-lock');
+        }
+    }
+</script>

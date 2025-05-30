@@ -1,0 +1,87 @@
+﻿<!-- Sipariş Detay Modalı -->
+<div class="modal" id="orderDetailModal">
+    <div class="modal-content">
+        <div class="modal-scroll">
+            <div class="modal-header">
+                <h4>Sipariş Detayları (<span id="modalOrderNumber"></span>)</h4>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="order-details">
+                    <input type="hidden" id="currentOrderId" />
+
+                    <div class="order-section">
+                        <h5>Müşteri Bilgileri</h5>
+                        <div class="detail-row">
+                            <span class="detail-label">Ad Soyad:</span>
+                            <span class="detail-value" id="customerName"></span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Telefon:</span>
+                            <span class="detail-value" id="customerPhone"></span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">E-posta:</span>
+                            <span class="detail-value" id="customerEmail"></span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Adres:</span>
+                            <span class="detail-value" id="customerAddress"></span>
+                        </div>
+                    </div>
+
+                    <div class="order-section">
+                        <h5>Sipariş Bilgileri</h5>
+                        <div class="detail-row">
+                            <span class="detail-label">Sipariş Tarihi:</span>
+                            <span class="detail-value" id="orderDate"></span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Toplam Tutar:</span>
+                            <span class="detail-value" id="orderTotal"></span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">İndirim Tutarı:</span>
+                            <span class="detail-value" id="orderDiscount"></span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Ödeme Yöntemi:</span>
+                            <span class="detail-value" id="paymentMethod"></span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Sipariş Durumu:</span>
+                            <select id="orderStatus" class="form-control">
+                                <option value="Onay Bekleniyor">Onay Bekleniyor</option>
+                                <option value="Hazırlanıyor">Hazırlanıyor</option>
+                                <option value="Kargoda">Kargoda</option>
+                                <option value="Teslim Edildi">Teslim Edildi</option>
+                                <option value="İptal Edildi">İptal Edildi</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="order-section">
+                        <h5>Sipariş Ürünleri</h5>
+                        <table class="order-items-table">
+                            <thead>
+                                <tr>
+                                    <th>Ürün</th>
+                                    <th>Adet</th>
+                                    <th>Birim Fiyat</th>
+                                    <th>Toplam</th>
+                                </tr>
+                            </thead>
+                            <tbody id="orderItems">
+                                <!-- Order items will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary close-modal">Kapat</button>
+                <button type="button" class="btn btn-accent" id="saveOrderStatusBtn">Durumu Güncelle</button>
+            </div>
+        </div>
+    </div>
+</div>

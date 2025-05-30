@@ -1,0 +1,158 @@
+﻿@using System.Globalization
+@model ProductRecommendationViewModel
+<div class="cart-recommendations">
+    <h2><i class="fas fa-heart"></i> Bu Ürünlerle İlginizi Çekebilir</h2>
+    <div class="recommendation-slider">
+        @foreach (var item in Model.Products)
+        {
+            <div class="recommended-item">
+                <a href="/Anasayfa/Kategoriler/@FormatForUrl(item.CategoryName)/@FormatForUrl(item.Name)?productId=@item.ProductID" class="product-card-link"></a>
+                <div class="product-image-wrapper">
+                    <img src="@item.ImageUrl" alt="@item.Name" loading="lazy">
+                    @if (item.Status == true && item.Status != null && Model.UserInfo != null)
+                    {
+                        <button class="slider-favorite-btn active" data-favoritesCardItemID="@item.FavoritesCardItemID" data-favoritesCardID="@item.FavoritesCardID" data-productID="@item.ProductID" data-favorites="favorites">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                    }
+                    else if (item.Status == false && item.Status != null && Model.UserInfo != null)
+                    {
+                        <button class="slider-favorite-btn" data-favoritesCardItemID="@item.FavoritesCardItemID" data-favoritesCardID="@item.FavoritesCardID" data-productID="@item.ProductID" data-favorites="favorites">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    }
+                    else
+                    {
+                        <a href="#" class="slider-favorite-btn show-modal-trigger">
+                            <i class="far fa-heart"></i>
+                        </a>
+                    }
+                </div>
+                <div class="product-info">
+                    <div class="product-title">@item.Name</div>
+                    <div class="product-description">@item.Description</div>
+                    <div class="price-section">
+                        @if (item.SaleSeason && item.SalePrice.HasValue)
+                        {
+                            <div class="price-container">
+                                <span class="original-price">₺@item.Price.ToString("N2", CultureInfo.GetCultureInfo("tr-TR"))</span>
+                                <span class="discounted-price">₺@string.Format(CultureInfo.GetCultureInfo("tr-TR"), "{0:N2}", item.SalePrice)</span>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="price-container">
+                                <span class="normal-price">₺@item.Price.ToString("N2", CultureInfo.GetCultureInfo("tr-TR"))</span>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="add-to-cart-container">
+                    @if (Model.UserInfo != null && Model.UserInfo.Roles.Count != 0 && Model.UserInfo.Roles != null)
+                    {
+                        <button class="add-to-cart-btn" data-product-id="@item.ProductID" data-quantity-id="1" data-refresh="refresh">
+                            <i class="fas fa-cart-plus"></i> Sepete Ekle
+                        </button>
+                    }
+                    else
+                    {
+                        <a href="#" class="add-to-cart-btn show-modal-trigger">
+                            <i class="fas fa-cart-plus"></i> Sepete Ekle
+                        </a>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@functions {
+    public string FormatForUrl(string text)
+    {
+        if (string.IsNullOrEmpty(text))
+            return string.Empty;
+
+        text = text.ToLower(System.Globalization.CultureInfo.GetCultureInfo("tr-TR"));
+
+        var turkishChars = "ığüşöç";
+        var englishChars = "igusoc";
+
+        for (int i = 0; i < turkishChars.Length; i++)
+        {
+            text = text.Replace(turkishChars[i], englishChars[i]);
+        }
+
+        text = System.Text.RegularExpressions.Regex.Replace(text, @"[^a-z0-9\s-]", "");
+        text = text.Replace(" ", "-");
+        text = System.Text.RegularExpressions.Regex.Replace(text, @"-+", "-");
+        return text.Trim('-');
+    }
+}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('click', async function (e) {
+            const button = e.target.closest('.add-to-cart-btn-sepet');
+            if (!button) return;
+
+            // Giriş kontrolü
+            if (!document.querySelector('.user-info')) {
+                if (button.classList.contains('show-modal-trigger')) {
+                    e.preventDefault();
+                    Swal.fire({
+                        title: 'Giriş Yapın',
+                        text: 'Sepete eklemek için giriş yapmalısınız',
+                        icon: 'info'
+                    });
+                }
+                return;
+            }
+
+            e.preventDefault();
+            const productId = button.getAttribute('data-product-id');
+            const quantity = parseInt(button.getAttribute('data-quantity-id')) || 1;
+
+            try {
+                // Loading göster
+                Swal.fire({
+                    title: 'Lütfen Bekleyin',
+                    html: 'Ürün sepete ekleniyor...',
+                    allowOutsideClick: false,
+                    didOpen: () => Swal.showLoading()
+                });
+
+                // API isteği
+                const response = await fetch('/ProductShoppingCard/AddToCart', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                    },
+                    body: JSON.stringify({ productId, quantity })
+                });
+
+                if (!response.ok) throw new Error('HTTP hatası: ' + response.status);
+                const data = await response.json();
+
+                // Başarı mesajını göster ve SONRASINDA sayfayı yenile
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Başarılı!',
+                    text: data.message || 'Ürün sepete eklendi',
+                    timer: 1500,
+                    showConfirmButton: false
+                }).then(() => {
+                    window.location.reload(); // SweetAlert kapatıldığında sayfayı yenile
+                });
+
+            } catch (error) {
+                console.error('Hata:', error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Hata!',
+                    text: 'Ürün sepete eklenirken bir hata oluştu: ' + error.message
+                });
+            }
+        });
+    });
+</script>

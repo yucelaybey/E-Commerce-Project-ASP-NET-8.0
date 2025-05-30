@@ -1,0 +1,86 @@
+﻿@model List<GetCityDto>
+<div class="modal" id="editAddressModal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2><i class="fas fa-map-marker-edit"></i> Adres Düzenle</h2>
+        <form id="editAddressForm">
+            <span style="display:none" data-id=""></span>
+            <input type="hidden" id="editAddressId">
+            <div class="form-group">
+                <label>Adres Başlığı</label>
+                <input type="text" id="editAddressTitle" placeholder="Örnek: Ev, İş" required>
+            </div>
+            <div class="form-group">
+                <label>Ad Soyad</label>
+                <input type="text" id="editAddressFullName" placeholder="Ad Soyad"
+                       pattern="[a-zA-ZğüşıöçĞÜŞİÖÇ\s]+"
+                       title="Sadece harf ve boşluk karakterleri kullanabilirsiniz" required>
+            </div>
+            <div class="form-group">
+                <label>Telefon</label>
+                <input type="tel" id="editAddressPhone" placeholder="+90 555 123 4567"
+                       pattern="\+90\s\d{3}\s\d{3}\s\d{4}"
+                       title="+90 555 123 4567 formatında giriniz" required>
+            </div>
+            <div class="form-group">
+                <label>İl</label>
+                <select id="editAddressCity" required>
+                    <option value="">Seçiniz</option>
+                    @foreach (var city in Model)
+                    {
+                        <option value="@city.CityId">@city.CityName</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label>İlçe</label>
+                <select id="editAddressTown" required>
+                    <option value="">İl seçiniz</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Semt</label>
+                <select id="editAddressQuarter" required>
+                    <option value="">İlçe seçiniz</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Mahalle</label>
+                <select id="editAddressDistrict" required>
+                    <option value="">Semt seçiniz</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Adres</label>
+                <textarea id="editAddressDetails" rows="3" placeholder="Adres detayları" required></textarea>
+            </div>
+            <div class="form-checkbox">
+                <input type="checkbox" id="editSetDefaultAddress">
+                <label for="editSetDefaultAddress">Varsayılan adres olarak ayarla</label>
+            </div>
+                <button type="submit" class="save-btn">Güncelle</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        // Ad Soyad Kontrolü
+        $('#editAddressFullName').on('input', function () {
+            $(this).val($(this).val().replace(/[^a-zA-ZğüşıöçĞÜŞİÖÇ\s]/g, ''));
+        });
+
+        // Telefon Formatlama
+        $('#editAddressPhone').val('+90 ').on('input', function () {
+            let value = $(this).val().replace(/\D/g, '');
+            if (!value.startsWith('90')) value = '90' + value;
+
+            let formatted = '+90';
+            if (value.length > 2) formatted += ' ' + value.substring(2, 5);
+            if (value.length > 5) formatted += ' ' + value.substring(5, 8);
+            if (value.length > 8) formatted += ' ' + value.substring(8, 12);
+
+            $(this).val(formatted);
+        });
+    });
+</script>

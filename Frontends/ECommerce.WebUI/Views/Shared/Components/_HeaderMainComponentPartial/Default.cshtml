@@ -1,0 +1,107 @@
+﻿@model GetCategoryAndUserInfoModel
+
+@{
+    var categories = Model.Categories;
+    var userInfo = Model.UserInfo;
+}
+
+<header>
+    <div class="navbar">
+        <div class="nav-logo">
+            <div class="logo">
+                <a href="/Anasayfa"><img src="~/logo/amazon_logo.png" alt="Site Logo"></a>
+            </div>
+        </div>
+        <div class="nav-search">
+            <div class="search-input-wrapper">
+                <input class="search-input" type="text" placeholder="Ara...">
+                <button class="search-btn">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+                <div class="search-results-container">
+                    <div class="loading-indicator">
+                        <div class="spinner"></div>
+                        <span>Arıyor...</span>
+                    </div>
+                    <div class="search-results"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-auth">
+            @if (userInfo != null && userInfo.Roles.Count != 0 && userInfo.Roles != null)
+            {
+                <div class="user-profile" id="userProfile">
+                    <div class="user-info">
+                        <i class="fas fa-user-circle user-icon"></i>
+                        <span class="username">@userInfo.NameSurname</span>
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </div>
+                    <div class="dropdown-menu">
+                        @if (userInfo.Roles.Contains("Admin"))
+                        {
+                            <a href="/YoneticiPaneli/Anasayfa" class="dropdown-item">
+                                <i class="fas fa-lock"></i>
+                                <span>Admin Paneli</span>
+                            </a>
+                        }
+                        <a href="/Anasayfa/Hesabim" class="dropdown-item">
+                            <i class="fas fa-user"></i>
+                            <span>Hesabım</span>
+                        </a>
+                        <a href="/Anasayfa/Siparislerim" class="dropdown-item">
+                            <i class="fas fa-box"></i>
+                            <span>Siparişlerim</span>
+                        </a>
+                        <a href="/Anasayfa/Favoriler" class="dropdown-item">
+                            <i class="fas fa-heart"></i>
+                            <span>Favorilerim</span>
+                        </a>
+                        <a href="/Login/CikisYap" class="dropdown-item">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Çıkış Yap</span>
+                        </a>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <a href="/Login/GirisYap"><button class="nav-btn">Giriş Yap</button></a>
+                <a href="/Login/KayitOl"><button class="nav-btn">Kayıt Ol</button></a>
+            }
+        </div>
+        <div class="nav-cart">
+            @if (userInfo != null && userInfo.Roles.Count != 0 && userInfo.Roles != null)
+            {
+                @await Component.InvokeAsync("_CardCountComponentPartial")
+            }
+            else
+            {
+                <a href="#" class="cart-link show-modal-trigger">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            }
+        </div>
+    </div>
+    <div class="bottom-panel">
+        <div class="panel-alt all-categories-btn">
+            <i class="fas fa-bars"></i> Tümü
+        </div>
+        <div>
+            <!-- Tüm Kategorileri Görüntüle Bağlantısı (Trend Ürünler gibi) -->
+            <a href="/Anasayfa/Kategoriler/" class="panel-item all-categories-link">
+                <i class="fas fa-list"></i>
+                <span>Tüm Kategorileri Görüntüle</span>
+            </a>
+        </div>
+        <div>
+            <!-- Trend Ürünler Bağlantısı -->
+            <a href="/Anasayfa/OneCikanlar" class="panel-item trending">
+                <i class="fas fa-chart-line"></i>
+                <span>Trend Ürünler</span>
+            </a>
+        </div>
+    </div>
+
+</header>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trend Ürünler</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="trend-products.css">
+</head>
+
+<body>
+    <header>
+        <!-- Top Bar (Ana Sayfa ile Aynı) -->
+        <div class="navbar">
+            <div class="nav-logo">
+                <div class="logo">
+                    <a href="index.html"><img src="amazon_logo.png" alt="Site Logo"></a>
+                </div>
+            </div>
+            <div class="nav-search">
+                <select class="search-select">
+                    <option selected>Tüm Kategoriler</option>
+                    <option>Elektronik</option>
+                    <option>Kitaplar</option>
+                    <option>Giyim</option>
+                    <option>Ev & Yaşam</option>
+                </select>
+                <input class="search-input" type="text" placeholder="Ara...">
+                <button class="search-btn">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
+            <div class="nav-auth">
+                <a href="login.html"><button class="nav-btn">Giriş Yap</button></a>
+                <a href="register.html"><button class="nav-btn">Kayıt Ol</button></a>
+            </div>
+            <div class="nav-cart">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="cart-count">0</span>
+            </div>
+        </div>
+        <div class="bottom-panel">
+            <div class="panel-alt all-categories-btn">
+                <i class="fas fa-bars"></i> Tümü
+            </div>
+            <div class="panel-options">
+                <a href="trend-products.html" class="panel-item trending">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Trend Ürünler</span>
+                </a>
+            </div>
+        </div>
+    </header>
+    <!-- Sidebar (Masaüstü) -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h3>Kategoriler</h3>
+            <i class="fas fa-times close-sidebar"></i>
+        </div>
+        <div class="sidebar-content">
+            <div class="category-section">
+                <div class="category-item">
+                    <span>Elektronik</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <ul class="sub-categories">
+                    <li>Bilgisayarlar</li>
+                    <li>Akıllı Telefonlar</li>
+                    <li>Ev Elektroniği</li>
+                </ul>
+            </div>
+            <div class="category-section">
+                <div class="category-item">
+                    <span>Giyim</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <ul class="sub-categories">
+                    <li>Erkek</li>
+                    <li>Kadın</li>
+                    <li>Çocuk</li>
+                </ul>
+            </div>
+            <div class="category-section">
+                <div class="category-item">
+                    <span>Ev & Yaşam</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <ul class="sub-categories">
+                    <li>Mobilya</li>
+                    <li>Mutfak</li>
+                    <li>Bahçe</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobil Menü -->
+    <div class="mobile-menu">
+        <div class="mobile-menu-header">
+            <h3>Kategoriler</h3>
+            <i class="fas fa-times close-mobile-menu"></i>
+        </div>
+        <div class="mobile-menu-content">
+            <div class="category-section">
+                <div class="category-item">
+                    <span>Elektronik</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <ul class="sub-categories">
+                    <li>Bilgisayarlar</li>
+                    <li>Akıllı Telefonlar</li>
+                    <li>Ev Elektroniği</li>
+                </ul>
+            </div>
+            <div class="category-section">
+                <div class="category-item">
+                    <span>Giyim</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <ul class="sub-categories">
+                    <li>Erkek</li>
+                    <li>Kadın</li>
+                    <li>Çocuk</li>
+                </ul>
+            </div>
+            <div class="category-section">
+                <div class="category-item">
+                    <span>Ev & Yaşam</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <ul class="sub-categories">
+                    <li>Mobilya</li>
+                    <li>Mutfak</li>
+                    <li>Bahçe</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb (Anasayfa > Trend Ürünler) -->
+    <div class="breadcrumb">
+        <a href="index.html">Anasayfa</a> &gt; <span>Trend Ürünler</span>
+    </div>
+
+    <!-- Trend Ürünler Sayfası İçeriği -->
+    <div class="trend-products-page">
+        <div class="filter-sort-container">
+            <button class="filter-btn">
+                <i class="fas fa-filter"></i> Filtrele
+            </button>
+            <select class="sort-select">
+                <option value="popular">Önce Popüler</option>
+                <option value="price-high-to-low">Fiyatı Azalan</option>
+                <option value="price-low-to-high">Fiyatı Artan</option>
+            </select>
+        </div>
+        <div class="products-grid">
+            <!-- Ürün Kartları -->
+            <div class="product-card">
+                <div class="fast-delivery">
+                    <i class="fas fa-shipping-fast"></i> Hızlı Teslimat
+                </div>
+                <div class="product-category">
+                    <span>Elektronik</span>
+                </div>
+                <img src="box1_image.jpg" alt="Ürün 1">
+                <div class="product-details">
+                    <h3>Ürün 1</h3>
+                    <p>Bu ürün harika bir özelliğe sahiptir ve kullanıcılar tarafından çok sevilmektedir.</p>
+                    <div class="product-stats">
+                        <span class="cart-count-effect">1.2k Sepete Eklendi</span>
+                    </div>
+                    <div class="product-price">₺199</div>
+                    <button class="add-to-cart-btn">
+                        <i class="fas fa-cart-plus"></i> Sepete Ekle
+                    </button>
+                </div>
+            </div>
+            <!-- Diğer ürün kartları buraya eklenecek -->
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Hakkımızda</h3>
+                <p>Şirketimiz 2000 yılından beri kaliteli ürünler sunmaktadır.</p>
+            </div>
+            <div class="footer-section">
+                <h3>İletişim</h3>
+                <p>Email: info@example.com</p>
+                <p>Telefon: +90 123 456 78 90</p>
+            </div>
+            <div class="footer-section">
+                <h3>Sosyal Medya</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Tüm Hakları Saklıdır.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

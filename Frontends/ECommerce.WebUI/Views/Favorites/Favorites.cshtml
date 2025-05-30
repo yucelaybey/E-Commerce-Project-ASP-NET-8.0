@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewData["Title"] = "Favorites";
+    Layout = "~/Views/UILayout/UIMainLayout.cshtml";
+}
+
+@await Component.InvokeAsync("_HeaderFavoritesComponentPartial")
+
+    <!-- Main Content -->
+    <main class="favorites-container">
+        <div class="container">
+            <div class="favorites-content">
+
+                <!-- Favori Ürünler -->
+            @await Component.InvokeAsync("_ProductFavoritesComponentPartial")
+
+            @await Component.InvokeAsync("_EmptyFavaritesComponentPartial")
+            </div>
+
+        @await Component.InvokeAsync("_RecommendedFavoritesComponentPartial")
+
+        </div>
+    </main>
+
+<script src="~/js/favoritesFilter.js"></script>
+

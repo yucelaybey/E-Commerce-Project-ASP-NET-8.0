@@ -1,0 +1,272 @@
+/* TEMEL AYARLAR */
+:root {
+    --primary-color: #ff9900;
+    --primary-hover: #e68a00;
+    --bg-dark: #131921;
+    --bg-darker: #232f3e;
+    --text-light: #ffffff;
+    --text-muted: rgba(255, 255, 255, 0.7);
+    --success-color: #00C851;
+    --error-color: #ff4444;
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, var(--bg-dark), var(--bg-darker));
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    color: var(--text-light);
+    position: relative;
+}
+
+/* LOADING EKRANI */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(19, 25, 33, 0.95);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.loading-spinner {
+    border: 4px solid rgba(255, 255, 255, 0.2);
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px;
+}
+
+.loading-screen p {
+    color: var(--text-light);
+    font-size: 1.1rem;
+}
+
+/* BİLDİRİMLER */
+.notification,
+.error-notification {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-100%);
+    padding: 12px 20px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 1001;
+    opacity: 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: var(--transition);
+    max-width: 90%;
+    font-size: 0.9rem;
+}
+
+.notification {
+    background: var(--success-color);
+}
+
+.error-notification {
+    background: var(--error-color);
+}
+
+    .notification i,
+    .error-notification i {
+        font-size: 1rem;
+    }
+
+/* ANA SAYFAYA DÖN BUTONU */
+.back-to-home {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: #ff9900;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+}
+
+    .back-to-home:hover {
+        background: var(--primary-hover);
+    }
+
+/* ANA İÇERİK */
+.content {
+    width: 100%;
+    max-width: 380px; /* Küçültülmüş container */
+    position: relative;
+    display: none;
+}
+
+/* AUTH CONTAINER */
+.auth-container {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    border-radius: 12px;
+    padding: 25px;
+    width: 100%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 1;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+    .auth-container h2 {
+        color: var(--text-light);
+        margin-bottom: 20px;
+        font-size: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+
+/* FORM ELEMANLARI */
+.input-group {
+    margin-bottom: 15px;
+}
+
+    .input-group input {
+        width: 100%;
+        padding: 12px 15px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        color: var(--text-light);
+        font-size: 0.95rem;
+        transition: var(--transition);
+    }
+
+        .input-group input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .input-group input::placeholder {
+            color: var(--text-muted);
+        }
+
+/* BUTONLAR */
+.submit-button {
+    width: 100%;
+    padding: 12px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+    .submit-button:disabled {
+        background: #555;
+        cursor: not-allowed;
+        opacity: 0.7;
+    }
+
+    .submit-button:hover:not(:disabled) {
+        background: var(--primary-hover);
+    }
+
+/* RESEND CODE */
+.resend-code {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.resend-text {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+.resend-button {
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    font-weight: bold;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 0.85rem;
+    padding: 0;
+}
+
+    .resend-button:hover {
+        color: var(--primary-hover);
+        text-decoration: underline;
+    }
+
+/* ANIMASYONLAR */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* MOBILE UYUMLULUK */
+@media (max-width: 480px) {
+    body {
+        padding: 15px;
+    }
+
+    .back-to-home {
+        top: 15px;
+        left: 15px;
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+
+    .auth-container {
+        padding: 20px;
+        max-width: 100%;
+    }
+
+        .auth-container h2 {
+            font-size: 1.3rem;
+        }
+
+    .input-group input {
+        padding: 10px 12px;
+    }
+
+    .submit-button {
+        padding: 10px;
+    }
+
+    .notification,
+    .error-notification {
+        padding: 10px 15px;
+        font-size: 0.85rem;
+    }
+}

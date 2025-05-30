@@ -1,0 +1,62 @@
+﻿@using System.Globalization
+@model ShoppingCartWithTotalsDto
+
+<!-- Sipariş Özeti -->
+<div class="order-summary">
+    <div class="summary-header">
+        <h2><i class="fas fa-receipt"></i> Sipariş Özeti</h2>
+    </div>
+    <div class="summary-items">
+        @foreach (var item in Model.Items)
+        {
+            @if (item.Status)
+            {
+                <div class="summary-item">
+                    <img src="@item.ProductImageUrl" alt="@item.ProductName">
+                    <div class="item-info">
+                        <h4>@item.ProductName</h4>
+                        @if (item.ProductSaleSeason)
+                        {
+                            <del style="color:darkred">₺@string.Format(CultureInfo.GetCultureInfo("tr-TR"), "{0:N2}", item.ProductPrice)</del>
+                            <p style="color:limegreen">@item.Quantity x ₺@string.Format(CultureInfo.GetCultureInfo("tr-TR"), "{0:N2}", item.ProductSalePrice)</p>
+                        }
+                        else
+                        {
+                            <p style="color:limegreen">@item.Quantity x ₺@string.Format(CultureInfo.GetCultureInfo("tr-TR"), "{0:N2}", item.ProductPrice)</p>
+                        }
+
+                    </div>
+                </div>
+            }
+        }
+        
+    </div>
+    <div class="summary-totals">
+        <div class="total-row">
+            <span>Ürün Toplamı</span>
+            <span>₺@string.Format(CultureInfo.GetCultureInfo("tr-TR"), "{0:N2}", Model.TotalPrice)</span>
+        </div>
+        <div class="total-row">
+            <span>Kargo</span>
+            <span class="free">Ücretsiz</span>
+        </div>
+        @if (Model.TotalDiscountAmount != 0)
+        {
+            <div class="total-row discount">
+                <span>İndirim</span>
+                <span>-₺@string.Format(CultureInfo.GetCultureInfo("tr-TR"), "{0:N2}", Model.TotalDiscountAmount)</span>
+            </div>
+        }
+        <div class="total-row grand-total">
+            <span>Toplam</span>
+            <span>₺@string.Format(CultureInfo.GetCultureInfo("tr-TR"), "{0:N2}", Model.TotalSalePrice)</span>
+        </div>
+    </div>
+    <button class="complete-payment">
+        <i class="fas fa-lock"></i> ÖDEMEYİ TAMAMLA (₺@string.Format(CultureInfo.GetCultureInfo("tr-TR"), "{0:N2}", Model.TotalSalePrice))
+    </button>
+    <div class="security-badges">
+        <img src="~/logo/ssl-certificate.png" alt="SSL Sertifikası">
+        <img src="~/logo/credit-cart.png" alt="3D Secure">
+    </div>
+</div>

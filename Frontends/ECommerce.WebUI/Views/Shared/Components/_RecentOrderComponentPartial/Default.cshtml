@@ -1,0 +1,79 @@
+﻿@using System.Globalization
+@model List<GetOrderDto>
+<!-- Recent Orders -->
+<div class="card">
+    <div class="card-header">
+        <h3>Son 5 Sipariş</h3>
+        <button class="btn btn-sm btn-accent">
+            <i class="fas fa-sync-alt"></i> Yenile
+        </button>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sipariş No</th>
+                        <th>Müşteri</th>
+                        <th>Durum</th>
+                        <th>Tutar</th>
+                        <th>Tarih</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Count == 0)
+                    {
+                        <tr>
+                            <td colspan="6" style="text-align: center;">
+                                <b style="color: red;">Sipariş bulunmamaktadır</b>
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+
+
+                        @foreach (var item in Model.TakeLast(5))
+                        {
+                            <tr>
+                                <td>@item.OrderNumber</td>
+                                <td>@item.NameSurname</td>
+                                @if (item.OrderStatus == "Onay Bekleniyor")
+                                {
+                                    <td><span class="badge bg-primary">Onay Bekleniyor</span></td>
+                                }
+                                else if (item.OrderStatus == "Hazırlanıyor")
+                                {
+                                    <td><span class="badge bg-warning">Hazırlanıyor</span></td>
+                                }
+                                else if (item.OrderStatus == "Kargoda")
+                                {
+                                    <td><span class="badge bg-info">Kargoda</span></td>
+                                }
+                                else if (item.OrderStatus == "Teslim Edildi")
+                                {
+                                    <td><span class="badge bg-success">Tamamlandı</span></td>
+                                }
+                                else if (item.OrderStatus == "İptal Edildi")
+                                {
+                                    <td><span class="badge bg-danger">İptal</span></td>
+                                }
+
+                                <td>₺@string.Format(CultureInfo.GetCultureInfo("tr-TR"), "{0:N2}", item.TotalAmount)</td>
+                                <td>@item.OrderDate.ToShortDateString()</td>
+                                <td>
+                                    <button class="btn-icon btn-view" data-id="@item.OrderID">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@await Component.InvokeAsync("_OrderDetailsComponentPartial")

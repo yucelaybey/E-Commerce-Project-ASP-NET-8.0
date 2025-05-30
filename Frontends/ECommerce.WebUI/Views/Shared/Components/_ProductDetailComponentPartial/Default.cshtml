@@ -1,0 +1,55 @@
+﻿@model ProductDetailWithUserInfoViewModel
+
+<div class="product-detail-container">
+    <div class="product-gallery">
+        <div class="main-image">
+            <img src="@Model.Product.ImageUrl" alt="Ürün Resmi">
+        </div>
+    </div>
+    <div class="product-info">
+        <h1 class="product-title">@Model.Product.Name</h1>
+        <div class="product-rating">
+            <span class="stars">★★★★☆</span>
+            <span class="review-count">(123 Değerlendirme)</span>
+        </div>
+        <div class="product-price">
+            @if (Model.Product.SaleSeason && Model.Product.SalePrice.HasValue)
+            {
+                <span style="text-decoration:line-through" class="original-price">₺@Model.Product.Price.ToString("N0")</span>
+                <span style="color:limegreen" class="discounted-price">₺@Model.Product.SalePrice.Value.ToString("N0")</span>
+                <span class="discount-percentage">%@Convert.ToInt32(Model.Product.DiscountRate) İndirim</span>
+            }
+            else
+            {
+                <span style="color:black" class="original-price">₺@Model.Product.Price.ToString("N0")</span>
+            }
+        </div>
+        <p class="product-description">
+            @Model.Product.Description
+        </p>
+        <div class="stock-status">
+            <span>Stok Durumu:</span>
+            <span class="stock-count">@Model.Product.Stock</span> adet
+        </div>
+        <div class="quantity-selector">
+            <span>Adet:</span>
+            <div class="quantity-control">
+                <button class="quantity-btn minus-btn" type="button">-</button>
+                <input type="number" class="quantity-input" value="1" min="1" max="@Model.Product.Stock">
+                <button class="quantity-btn plus-btn" type="button">+</button>
+            </div>
+        </div>
+        @if (Model.UserInfo.Roles != null && Model.UserInfo.Roles.Any())
+        {
+            <button class="add-to-cart-btn" data-product-id="@Model.Product.ProductID">
+                <i class="fas fa-cart-plus"></i> Sepete Ekle
+            </button>
+        }
+        else
+        {
+            <a href="#" class="add-to-cart-btn show-modal-trigger" style="text-decoration:none">
+                <i class="fas fa-cart-plus"></i> Sepete Ekle
+            </a>
+        }
+    </div>
+</div>

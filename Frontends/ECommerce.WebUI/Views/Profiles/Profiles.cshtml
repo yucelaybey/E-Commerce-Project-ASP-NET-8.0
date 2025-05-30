@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewData["Title"] = "Profiles";
+    Layout = "~/Views/UILayout/UIProfilesLayout.cshtml";
+}
+
+<!-- Main Content -->
+<main class="profile-main">
+    <div class="container">
+        
+        @await Component.InvokeAsync("_UserInfoSectionProfilesComponentPartial")
+
+        @await Component.InvokeAsync("_AddressesSectionProfilesComponentPartial")
+
+        @await Component.InvokeAsync("_CardSectionProfilesComponentPartial")
+
+    </div>
+</main>

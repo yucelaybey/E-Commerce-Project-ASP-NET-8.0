@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hesap Ayarları</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="admin-settings.css"> <!-- Hesap Ayarları için CSS -->
+    <link rel="stylesheet" href="admin-dashboard.css"> <!-- Hesap Ayarları için CSS -->
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <div class="admin-sidebar">
+        <div class="sidebar-header">
+            <h3>Admin Paneli</h3>
+        </div>
+        <div class="sidebar-menu">
+            <a href="admin-dashboard.html" class="sidebar-item">
+                <i class="fas fa-home"></i> Anasayfa
+            </a>
+            <a href="admin-categories.html" class="sidebar-item">
+                <i class="fas fa-list"></i> Kategori İşlemleri
+            </a>
+            <a href="admin-products.html" class="sidebar-item">
+                <i class="fas fa-box"></i> Ürün İşlemleri
+            </a>
+            <a href="admin-settings.html" class="sidebar-item active">
+                <i class="fas fa-cog"></i> Hesap Ayarları
+            </a>
+        </div>
+        <!-- Kullanıcı Bilgisi -->
+        <div class="user-info">
+            <div class="user-name">
+                <i class="fas fa-user"></i> Ahmet Yılmaz
+            </div>
+            <div class="user-email">
+                <i class="fas fa-envelope"></i> ahmet.yilmaz@example.com
+            </div>
+            <div class="login-time">
+                <i class="fas fa-clock"></i> 25 Ekim 2023, 14:30
+            </div>
+        </div>
+    </div>
+
+    <!-- Ana İçerik -->
+    <div class="admin-main-content">
+        <!-- Geri Dön Butonu -->
+        <div class="back-to-home">
+            <a href="index.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Ana Sayfaya Dön
+            </a>
+        </div>
+
+        <!-- Hesap Bilgileri -->
+        <div class="account-settings">
+            <h2>Hesap Ayarları</h2>
+            <div class="account-info">
+                <div class="info-item">
+                    <label>Adı:</label>
+                    <span id="firstName">Ahmet</span>
+                </div>
+                <div class="info-item">
+                    <label>Soyadı:</label>
+                    <span id="lastName">Yılmaz</span>
+                </div>
+                <div class="info-item">
+                    <label>Mail Adresi:</label>
+                    <span id="email">ahmet.yilmaz@example.com</span>
+                </div>
+                <div class="info-item">
+                    <label>Telefon Numarası:</label>
+                    <span id="phone">+90 555 123 45 67</span>
+                </div>
+                <div class="info-item">
+                    <label>Doğum Tarihi:</label>
+                    <span id="birthDate">01/01/1990</span>
+                </div>
+            </div>
+            <!-- Bilgileri Güncelle Butonu -->
+            <button class="update-btn" id="openUpdateModal">
+                <i class="fas fa-edit"></i> Bilgileri Güncelle
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="admin-footer">
+        <div class="footer-bottom">
+            <p>Tüm hakları saklıdır @ 2024</p>
+        </div>
+    </footer>
+
+    <!-- Bilgileri Güncelle Modal -->
+    <div class="modal" id="updateModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Bilgileri Güncelle</h2>
+            <form id="updateAccountForm">
+                <div class="form-group">
+                    <label for="updateFirstName">Adı</label>
+                    <input type="text" id="updateFirstName" value="Ahmet">
+                </div>
+                <div class="form-group">
+                    <label for="updateLastName">Soyadı</label>
+                    <input type="text" id="updateLastName" value="Yılmaz">
+                </div>
+                <div class="form-group">
+                    <label for="updateEmail">Mail Adresi</label>
+                    <input type="email" id="updateEmail" value="ahmet.yilmaz@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="updatePhone">Telefon Numarası</label>
+                    <input type="tel" id="updatePhone" value="+90 555 123 45 67">
+                </div>
+                <div class="form-group">
+                    <label for="updateBirthDate">Doğum Tarihi</label>
+                    <input type="date" id="updateBirthDate" value="1990-01-01">
+                </div>
+                <button type="submit" class="submit-btn">Güncelle</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="admin-settings.js"></script> <!-- Hesap Ayarları için JS -->
+</body>
+
+</html>

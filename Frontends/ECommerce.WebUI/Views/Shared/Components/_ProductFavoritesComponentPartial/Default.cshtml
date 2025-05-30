@@ -1,0 +1,59 @@
+﻿@using System.Globalization
+@model List<FavoritesCardItemWithProductDto>
+<div class="favorites-items">
+    @if (Model != null && Model.Any())
+    {
+        @foreach (var item in Model)
+        {
+            <div class="product-card">
+                @if (item.Product.SaleSeason)
+                {
+                    <div class="product-badge">%@Convert.ToInt32(item.Product.DiscountRate)</div>
+                }
+                <button class="slider-favorite-btn" data-favoritesCardItemID="@item.FavoritesCardItemId" data-favoritesCardID="@item.FavoritesCardId" data-productID="@item.Product.ProductID" data-favorites ="favorites"><i class="fas fa-heart"></i></button>
+                <div class="product-image">
+                    <img src="@item.Product.ImageUrl" alt="@item.Product.Name">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">@item.Product.Name</h3>
+                    <div class="product-rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="review-count">(203)</span>
+                    </div>
+                    <div class="product-price">
+                        @if (item.Product.SaleSeason)
+                        {
+                            <span class="current-price">₺@string.Format(CultureInfo.GetCultureInfo("tr-TR"), "{0:N2}", item.Product.SalePrice)</span>
+                            <span class="original-price">₺@item.Product.Price.ToString("N2", new CultureInfo("tr-TR"))</span>
+                        }
+                        else
+                        {
+                            <span style="color:black" class="current-price">₺@string.Format(CultureInfo.GetCultureInfo("tr-TR"), "{0:N2}", item.Product.Price)</span>
+                        }
+                    </div>
+                    <div class="product-stock">
+                        <i class="fas fa-check-circle"></i> <span>Stokta var</span>
+                    </div>
+                </div>
+                <div class="product-actions">
+                    <button class="add-to-cart" data-product-id="@item.Product.ProductID">
+                        <i class="fas fa-shopping-cart"></i> Sepete Ekle
+                    </button>
+                    <button class="add-to-cart-remove" data-product-id="@item.Product.ProductID" data-favorites-id ="@item.FavoritesCardItemId">
+                        <i class="fas fa-shopping-cart"></i> Sepete Ekle & Favorilerden Kaldır
+                    </button>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        @await Component.InvokeAsync("_NotFoundFavoritesComponentPartial")
+    }
+</div>

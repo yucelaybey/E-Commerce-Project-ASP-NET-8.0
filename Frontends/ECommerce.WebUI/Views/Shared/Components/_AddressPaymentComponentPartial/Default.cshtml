@@ -1,0 +1,45 @@
+﻿ @model List<GetAddressDto>
+<div class="address-modal" id="addressModal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2><i class="fas fa-map-marker-alt"></i> Teslimat Adresini Seç</h2>
+        @if (Model != null)
+        {
+            <div class="address-list">
+                @foreach (var item in Model)
+                {
+                    <div class="address-option @(item.IsDefault ? "selected" : "")" data-id="@item.AddressID">
+                        <div class="address-radio">
+                            <input type="radio" name="selectedAddress" id="address1" @(item.IsDefault ? "checked" : "")>
+                        </div>
+                        <div class="address-details">
+                            <h3>
+                                @item.NameSurname @if (item.IsDefault)
+                                {
+                                    <span class="default-badge">Varsayılan</span>
+                                }
+                            </h3>
+                            <p>@item.AddressDetails</p>
+                            <p>@item.Town/@item.City</p>
+                            <p>@FormatPhone(item.PhoneNumber)</p>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        <button class="select-address-btn">Adresi Seç</button>
+    </div>
+</div>
+
+@{
+    string FormatPhone(string phone)
+    {
+        if (string.IsNullOrEmpty(phone)) return phone;
+        phone = phone.Replace("+90", "").Trim();
+        if (phone.Length == 10)
+        {
+            return $"+90 {phone.Substring(0, 3)} {phone.Substring(3, 3)} {phone.Substring(6)}";
+        }
+        return $"+90 {phone}";
+    }
+}

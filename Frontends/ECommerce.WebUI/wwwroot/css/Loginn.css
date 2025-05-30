@@ -1,0 +1,223 @@
+/* Temel Stil Sıfırlama */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Stili */
+body {
+    background: linear-gradient(135deg, #131921, #232f3e);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+/* Arka Plan Animasyonu */
+.background-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255, 153, 0, 0.1), rgba(19, 25, 33, 0.1));
+    z-index: 0;
+    animation: moveBackground 10s infinite ease-in-out;
+}
+
+@keyframes moveBackground {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* Ana Sayfaya Dön Butonu */
+.back-to-home {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: #ff9900;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+}
+
+    .back-to-home:hover {
+        background: #e68a00;
+    }
+
+.validation-errors ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 1rem;
+    marker: none;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.validation-errors li {
+    color: #dc3545;
+    background-color: #f8d7da;
+    padding: 0.5rem;
+    list-style-type: none;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+}
+
+.text-danger ul li {
+    color: #dc3545;
+    font-size: 0.875em;
+    display: block;
+    margin-top: 0.25rem;
+    marker: none;
+    margin-bottom: 10px;
+    font-weight: bold;
+    list-style: none;
+}
+
+/* Giriş Yapma Kutusu */
+.auth-container {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 30px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+    .auth-container h2 {
+        color: white;
+        margin-bottom: 20px;
+        font-size: 2rem;
+    }
+
+/* Giriş Formu */
+.auth-form .input-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.auth-form input {
+    width: 100%;
+    padding: 12px 40px 12px 12px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    background: transparent;
+    color: white;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+    .auth-form input:focus {
+        border-color: #ff9900;
+        outline: none;
+    }
+
+    .auth-form input::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+.auth-form .input-group i {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+}
+
+/* Şifre Göster/Gizle İkonu */
+.toggle-password:hover {
+    color: #ff9900;
+}
+
+/* Buton Stili */
+.auth-form button {
+    background: #ff9900;
+    color: white;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+}
+
+    .auth-form button:hover {
+        background: #e68a00;
+    }
+
+/* Form Seçenekleri */
+.auth-form .form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+}
+
+    .auth-form .form-options label {
+        color: white;
+        font-size: 0.9rem;
+    }
+
+    .auth-form .form-options a {
+        color: #ff9900;
+        text-decoration: none;
+        font-size: 0.9rem;
+    }
+
+/* Sosyal Giriş Butonları */
+.auth-form .social-login {
+    margin-top: 20px;
+}
+
+    .auth-form .social-login p {
+        color: white;
+        margin-bottom: 10px;
+    }
+
+.auth-form .social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+    .auth-form .social-icons a {
+        color: white;
+        font-size: 1.5rem;
+        transition: color 0.3s ease;
+    }
+
+        .auth-form .social-icons a:hover {
+            color: #ff9900;
+        }
+
+/* Kayıt Ol Bağlantısı */
+.auth-form .switch-text {
+    color: white;
+    margin-top: 20px;
+}
+
+    .auth-form .switch-text a {
+        color: #ff9900;
+        text-decoration: none;
+    }

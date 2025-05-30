@@ -1,0 +1,183 @@
+﻿@using System.Globalization
+@model OrderConfirmationDto
+@{
+    ViewData["Title"] = "Confirmation";
+    Layout = "~/Views/UILayout/UIConfirmationLayout.cshtml";
+}
+
+<!-- Confirmation Content -->
+<main class="confirmation-main">
+    <div class="container">
+        <div class="confirmation-card">
+            <div class="confirmation-success">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h1>Siparişiniz Onaylandı!</h1>
+                <p class="order-number">Sipariş No: <span>@Model.Order.OrderNumber</span></p>
+                <p class="thank-you">Alışverişiniz için teşekkür ederiz. Sipariş detaylarınız aşağıda yer almaktadır.</p>
+            </div>
+
+            <div class="confirmation-details">
+                <!-- Delivery Section -->
+                <div class="detail-section">
+                    <div class="section-header">
+                        <i class="fas fa-truck"></i>
+                        <h2>Teslimat Bilgileri</h2>
+                    </div>
+                    <div class="section-content">
+                        <div class="detail-row">
+                            <span class="detail-label">Alıcı:</span>
+                            <span class="detail-value">@Model.AddressInfo.NameSurname</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Adres:</span>
+                            <span class="detail-value">@Model.AddressInfo.District @Model.AddressInfo.AddressDetails, @Model.AddressInfo.Town/@Model.AddressInfo.City</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Telefon:</span>
+                            <span class="detail-value">@FormatPhone(Model.AddressInfo.PhoneNumber)</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Tahmini Teslimat:</span>
+                            <span class="detail-value highlight">2 İş Günü İçinde</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Section -->
+                <div class="detail-section">
+                    <div class="section-header">
+                        <i class="fas fa-credit-card"></i>
+                        <h2>Ödeme Bilgileri</h2>
+                    </div>
+                    <div class="section-content">
+                        <div class="detail-row">
+                            <span class="detail-label">Ödeme Yöntemi:</span>
+                            <span class="detail-value">@Model.PaymentInfo.PaymentType</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Kart Bilgisi:</span>
+                            @if (Model.PaymentInfo.PaymentType == "Paypal")
+                            {
+                                <span class="detail-value">
+                                    @Model.PaymentInfo.PaymentNumber (Paypal)
+                                </span>
+                            }
+                            else if ((Model.PaymentInfo.PaymentType == "ApplePay"))
+                            {
+                                <span class="detail-value">
+                                    @Model.PaymentInfo.PaymentNumber (ApplePay)
+                                </span>
+
+                            }
+                            else if ((Model.PaymentInfo.PaymentType == "Kredi/Banka Kartı"))
+                            {
+                                <span class="detail-value">
+                                    @Model.PaymentInfo.PaymentNumber (VISA)
+                                </span>
+
+                            }
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Ödeme Durumu:</span>
+                            <span class="detail-value success-text">Başarılı</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="detail-section">
+                    <div class="section-header">
+                        <i class="fas fa-receipt"></i>
+                        <h2>Sipariş Özeti</h2>
+                    </div>
+                    <div class="order-items">
+                        <!-- Item 1 -->
+                        @foreach (var item in Model.GetOrderItemDto)
+                        {
+                            <div class="order-item">
+                                <div class="item-image">
+                                    <img src="@item.ImageUrl" alt="@item.Name">
+                                </div>
+                                <div class="item-info">
+                                    <h3>@item.Name</h3>
+                                    <p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;width: 485px;" class="item-variant">@item.Description</p>
+                                    <p class="item-quantity">Adet: @item.Quantity</p>
+                                </div>
+                                <div class="item-price">
+                                    @if (item.SaleSeason)
+                                    {
+                                        <span style="text-decoration:line-through" class="current-price">₺@string.Format(CultureInfo.GetCultureInfo("tr-TR"), "{0:N2}", item.Price * item.Quantity)</span>
+                                        <span class="discount">₺@string.Format(CultureInfo.GetCultureInfo("tr-TR"), "{0:N2}", item.SalePrice * item.Quantity)</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="current-price">₺@string.Format(CultureInfo.GetCultureInfo("tr-TR"), "{0:N2}", item.Price * item.Quantity)</span>
+                                    }
+
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    <div class="order-summary">
+                        <div class="summary-row">
+                            <span>Ürün Toplamı:</span>
+                            <span>₺@string.Format(CultureInfo.GetCultureInfo("tr-TR"), "{0:N2}", Model.Totals.TotalPrice)</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Kargo Ücreti:</span>
+                            <span class="free-shipping">Ücretsiz</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>İndirimler:</span>
+                            <span class="discount">-₺@string.Format(CultureInfo.GetCultureInfo("tr-TR"), "{0:N2}", Model.Totals.TotalDiscountAmount)</span>
+                        </div>
+                        <div class="summary-row grand-total">
+                            <span>Toplam:</span>
+                            <span>₺@string.Format(CultureInfo.GetCultureInfo("tr-TR"), "{0:N2}", Model.Totals.TotalSalePrice)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="confirmation-actions">
+                <a href="orders.html" class="action-btn primary-btn">
+                    <i class="fas fa-box"></i> Siparişi Takip Et
+                </a>
+                <a href="/Anasayfa" class="action-btn secondary-btn">
+                    <i class="fas fa-shopping-cart"></i> Alışverişe Devam Et
+                </a>
+            </div>
+        </div>
+
+        <!-- Customer Support -->
+        <div class="support-section">
+            <div class="support-icon">
+                <i class="fas fa-headset"></i>
+            </div>
+            <div class="support-content">
+                <h3>Yardıma mı ihtiyacınız var?</h3>
+                <p>7/24 Müşteri Destek ekibimizle iletişime geçebilirsiniz.</p>
+                <a href="/Anasayfa/Yardim" class="support-link">
+                    Destek Ekibiyle İletişim <i class="fas fa-chevron-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</main>
+
+@{
+    string FormatPhone(string phone)
+    {
+        if (string.IsNullOrEmpty(phone)) return phone;
+        phone = phone.Replace("+90", "").Trim();
+        if (phone.Length == 10)
+        {
+            return $"+90 {phone.Substring(0, 3)} {phone.Substring(3, 3)} {phone.Substring(6)}";
+        }
+        return $"+90 {phone}";
+    }
+}

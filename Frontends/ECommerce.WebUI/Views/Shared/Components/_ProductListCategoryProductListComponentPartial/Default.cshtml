@@ -1,0 +1,101 @@
+﻿@using System.Globalization
+@model Tuple<List<CategoryProductListDto>, UserInfoDto>
+@{
+    var productList = Model.Item1;
+    var UserInfo = Model.Item2;
+}
+
+<div class="products-grid">
+    @foreach (var product in productList)
+    {
+        <div class="product-card">
+            <!-- Ana container div olarak başlatıyoruz -->
+            <a href="/Anasayfa/Kategoriler/@FormatForUrl(product.CategoryName)/@FormatForUrl(product.Name)?productId=@product.ProductID"
+               class="product-card-link"
+               style="text-decoration: none">
+                @if (product.Favorites == true && product.Favorites != null && UserInfo != null)
+                {
+                    <button class="slider-favorite-btn" data-favoritesCardItemID="@product.FavoritesCardItemID" data-favoritesCardID="@product.FavoritesCardID" data-productID="@product.ProductID">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                }
+                else if (product.Favorites == false && product.Favorites != null && UserInfo != null)
+                {
+                    <button class="slider-favorite-btn" data-favoritesCardItemID="@product.FavoritesCardItemID" data-favoritesCardID="@product.FavoritesCardID" data-productID="@product.ProductID">
+                        <i class="far fa-heart"></i>
+                    </button>
+                }
+                else
+                {
+                    <a href="#" class="slider-favorite-btn show-modal-trigger" style="text-decoration:none">
+                        <i class="far fa-heart"></i>
+                    </a>
+                }
+                <div class="fast-delivery">
+                    <i class="fas fa-shipping-fast"></i> Hızlı Teslimat
+                </div>
+                <img src="@product.ImageUrl" alt="@product.Name">
+
+                <div class="product-details">
+                    <h3>@product.Name</h3>
+                    <p>@product.Description</p>
+                    <div class="product-stats">
+                        <span class="cart-count-effect">@product.TotalQuantityInCart.ToString("N0") Adet Satıldı</span>
+                    </div>
+                    <div class="product-price">
+                        @if (product.SaleSeason && product.SalePrice.HasValue)
+                        {
+                            <del>₺@product.Price.ToString("N2", CultureInfo.GetCultureInfo("tr-TR"))</del>
+                            <span style="color:limegreen">₺@string.Format(CultureInfo.GetCultureInfo("tr-TR"), "{0:N2}", product.SalePrice)</span>
+                        }
+                        else
+                        {
+                            <span>₺@product.Price.ToString("N2", CultureInfo.GetCultureInfo("tr-TR"))</span>
+                        }
+                    </div>
+
+                    @if (UserInfo != null && UserInfo.Roles?.Count > 0)
+                    {
+                        <button class="add-to-cart-btn-category" data-product-id="@product.ProductID" data-quantity-id="1">
+                            <i class="fas fa-cart-plus"></i> Sepete Ekle
+                        </button>
+                    }
+                    else
+                    {
+                        <a href="#" class="add-to-cart-btn-category show-modal-trigger" style="text-decoration:none">
+                            <i class="fas fa-cart-plus"></i> Sepete Ekle
+                        </a>
+                    }
+                </div>
+            </a>
+        </div>
+    }
+</div>
+
+@functions {
+    public string FormatForUrl(string text)
+    {
+        if (string.IsNullOrEmpty(text))
+            return string.Empty;
+
+        // Türkçe büyük harfleri önce küçült
+        text = text.ToLower(System.Globalization.CultureInfo.GetCultureInfo("tr-TR"));
+
+        // Tüm Türkçe karakterleri İngilizce karşılıklarıyla değiştir
+        var turkishChars = "ığüşöç";
+        var englishChars = "igusoc";
+
+        for (int i = 0; i < turkishChars.Length; i++)
+        {
+            text = text.Replace(turkishChars[i], englishChars[i]);
+        }
+
+        // Özel karakterleri temizle ve boşlukları tireye çevir
+        text = System.Text.RegularExpressions.Regex.Replace(text, @"[^a-z0-9\s-]", "");
+        text = text.Replace(" ", "-");
+
+        // Ardışık tireleri temizle
+        text = System.Text.RegularExpressions.Regex.Replace(text, @"-+", "-");
+        return text.Trim('-');
+    }
+}

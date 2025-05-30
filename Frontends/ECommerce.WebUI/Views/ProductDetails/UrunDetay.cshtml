@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = ViewBag.ProductName;
+    Layout = "~/Views/UILayout/UIMainLayout.cshtml";
+}
+
+@await Component.InvokeAsync("_BreadCrumbProductDetailsComponentPartial", new
+    {
+        categoryName = ViewBag.CategoryName,
+        productName = ViewBag.ProductName
+    })
+
+@await Component.InvokeAsync("_ProductDetailComponentPartial", new { productId = ViewBag.ProductId })
+
+@await Component.InvokeAsync("_RelatedProductsComponentPartial", new { categoryId = ViewBag.CategoryId })

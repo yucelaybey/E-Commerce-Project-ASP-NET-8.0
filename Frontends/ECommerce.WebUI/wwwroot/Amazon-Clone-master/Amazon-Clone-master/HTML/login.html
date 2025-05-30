@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giriş Yap</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Özel Stiller */
+        body {
+            background: linear-gradient(135deg, #131921, #232f3e);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .auth-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .auth-container h2 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .auth-form .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .auth-form input {
+            width: 100%;
+            padding: 12px 40px 12px 12px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            background: transparent;
+            color: white;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .auth-form input:focus {
+            border-color: #ff9900;
+            outline: none;
+        }
+
+        .auth-form input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .auth-form .input-group i {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .auth-form button {
+            background: #ff9900;
+            color: white;
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s ease;
+        }
+
+        .auth-form button:hover {
+            background: #e68a00;
+        }
+
+        .auth-form .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .auth-form .form-options label {
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .auth-form .form-options a {
+            color: #ff9900;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .auth-form .social-login {
+            margin-top: 20px;
+        }
+
+        .auth-form .social-login p {
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .auth-form .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .auth-form .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .auth-form .social-icons a:hover {
+            color: #ff9900;
+        }
+
+        .auth-form .switch-text {
+            color: white;
+            margin-top: 20px;
+        }
+
+        .auth-form .switch-text a {
+            color: #ff9900;
+            text-decoration: none;
+        }
+
+        /* Ana Sayfaya Dön Butonu */
+        .back-to-home {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #ff9900;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: background 0.3s ease;
+        }
+
+        .back-to-home:hover {
+            background: #e68a00;
+        }
+
+        /* Arka Plan Animasyonu */
+        @keyframes moveBackground {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
+
+        .background-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 153, 0, 0.1), rgba(19, 25, 33, 0.1));
+            z-index: 0;
+            animation: moveBackground 10s infinite ease-in-out;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background-animation"></div>
+    <a href="index.html" class="back-to-home">
+        <i class="fas fa-arrow-left"></i> Ana Sayfaya Dön
+    </a>
+    <div class="auth-container">
+        <h2><i class="fas fa-sign-in-alt"></i> Giriş Yap</h2>
+        <form class="auth-form">
+            <div class="input-group">
+                <input type="email" placeholder="E-posta" id="loginEmail" required>
+                <i class="fas fa-envelope"></i>
+            </div>
+            <div class="input-group">
+                <input type="password" placeholder="Şifre" id="loginPassword" required>
+                <i class="fas fa-lock"></i>
+            </div>  
+            <div class="form-options">
+                <label>
+                    <input type="checkbox"> Beni Hatırla
+                </label>
+                <a href="#">Şifremi Unuttum</a>
+            </div>
+            <button type="submit">Giriş Yap <i class="fas fa-arrow-right"></i></button>
+            <div class="social-login">
+                <p>Hızlı Giriş Yap:</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-google"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-apple"></i></a>
+                </div>
+            </div>
+            <p class="switch-text">Hesabın yok mu? <a href="register.html">Kayıt Ol</a></p>
+        </form>
+    </div>
+</body>
+
+</html>

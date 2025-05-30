@@ -1,0 +1,139 @@
+﻿@model List<GetPaymentCardDto>
+<div id="saved-cards" class="tab-content active">
+    <div class="saved-cards-grid">
+        @if (Model.Any())
+        {
+            @foreach (var item in Model)
+            {
+                <div class="saved-card">
+                    <div class="card">
+                        <div class="card-inner">
+                            <div class="front">
+                                <img src="~/logo/world-map-background-with-red-and-purple-gradient-vector.png"
+                                     class="map-img">
+                                <div class="row">
+                                    <img src="~/logo/chip.png" width="35px">
+                                    <img src="~/logo/visanew.png" width="35px">
+                                </div>
+                                <div class="row card-no">
+                                    <p class="card-number">@FormatCardNumber(item.CardNumber)</p>
+                                </div>
+                                <div class="row card-holder">
+                                    <p>KART SAHİBİ</p>
+                                    <p>SON KULLANMA</p>
+                                </div>
+                                <div class="row name">
+                                    <p class="card-holder-name">@item.CardHolderName</p>
+                                    <p class="card-expiry">@FormatExpirationDate(item.ExpirationDate.ToString())</p>
+                                </div>
+                            </div>
+                            <div class="back">
+                                <img src="~/logo/world-map-background-with-red-and-purple-gradient-vector.png"
+                                     class="map-img">
+                                <div class="bar"></div>
+                                <div class="row card-cvv">
+                                    <div>
+                                        <img src="~/logo/test.png">
+                                    </div>
+                                    <p class="card-cvv-number">@item.CVV</p>
+                                </div>
+                                <div class="row card-text" style="font-size: 0.7rem;">
+                                    <p>Kartın kullanımı kart ile ilgili sözleşmenin hükümlerine tabidir.</p>
+                                </div>
+                                <div class="row signature">
+                                    <p>YETKİLİ İMZA</p>
+                                    <img src="~/logo/visanew.png" width="45px">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-radio">
+                        @if (item.IsDefault)
+                        {
+                            <input type="radio" name="saved-card" id="card1" data-card-id="@item.PaymentCardId" checked>
+                        }
+                        else
+                        {
+                            <input type="radio" name="saved-card" id="card1" data-card-id ="@item.PaymentCardId">
+                        }
+                        <label for="card1">Varsayılan Kart</label>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="no-address" style="display: block;">
+                <div class="warning-box">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <p>Kart bilgisi bulunamadı. Lütfen HESABIM kısmından kart ekleyin.</p>
+                </div>
+                <a href="/Anasayfa/Hesabim" class="btn btn-theme">
+                    <i class="fas fa-plus-circle me-2"></i>
+                    Kart Ekle
+                </a>
+            </div>
+            <style>
+                .saved-cards-grid {
+                display:block;
+                }
+            </style>
+        }
+    </div>
+    @if (Model.Any())
+    {
+        <div class="show-card-details">
+            <input type="checkbox" id="showDetails">
+            <label for="showDetails">Kart bilgilerini göster</label>
+        </div>
+    }
+</div>
+
+@functions {
+    string FormatCardNumber(string cardNumber)
+    {
+        if (string.IsNullOrEmpty(cardNumber))
+            return string.Empty;
+
+        // Maskelenmiş kart numarası için (**** **** **** 1234 formatı)
+        if (cardNumber.Contains("*"))
+        {
+            var last4 = cardNumber.Replace(" ", "").Replace("*", "").TakeLast(4);
+            return $"**** **** **** {new string(last4.ToArray())}";
+        }
+
+        // Normal kart numarası için (1234 5678 9012 3456 formatı)
+        var cleaned = new string(cardNumber.Where(char.IsDigit).ToArray());
+        return string.Join(" ", Enumerable.Range(0, cleaned.Length / 4)
+                        .Select(i => cleaned.Substring(i * 4, 4)));
+    }
+
+    string FormatExpirationDate(string expirationDate)
+    {
+        if (string.IsNullOrEmpty(expirationDate))
+            return string.Empty;
+
+        try
+        {
+            // 1.12.2031 00:00:00 formatı için
+            if (expirationDate.Contains(".") && expirationDate.Contains(":"))
+            {
+                var dateParts = expirationDate.Split(' ')[0].Split('.');
+                if (dateParts.Length >= 3)
+                {
+                    var day = dateParts[0];
+                    var month = dateParts[1].PadLeft(2, '0');
+                    var year = dateParts[2].Length > 2 ? dateParts[2].Substring(2) : dateParts[2];
+                    return $"{month}/{year}";
+                }
+            }
+
+            // Diğer formatlar için orijinal değeri döndür
+            return expirationDate;
+        }
+        catch
+        {
+            return expirationDate;
+        }
+    }
+}

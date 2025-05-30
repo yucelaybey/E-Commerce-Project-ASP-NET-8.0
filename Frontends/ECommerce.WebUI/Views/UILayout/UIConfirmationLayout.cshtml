@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+
+@await Component.InvokeAsync("_HeadConfirmationComponentPartial")
+
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div class="loading-content">
+            <div class="spinner">
+                <div class="spinner-circle"></div>
+            </div>
+            <h2>Siparişiniz Onaylanıyor...</h2>
+            <p>Lütfen bekleyiniz</p>
+        </div>
+    </div>
+
+    <!-- Main Content (hidden initially) -->
+    <div class="confirmation-container">
+
+        @await Component.InvokeAsync("_TopBarShoppingComponentPartial")
+
+        @await Component.InvokeAsync("_HeaderConfirmationComponentPartial")
+
+        @RenderBody()
+
+        @await Component.InvokeAsync("_FooterMainComponentPartial")
+    </div>
+
+    <script src="~/js/confirmation.js"></script>
+</body>
+</html>

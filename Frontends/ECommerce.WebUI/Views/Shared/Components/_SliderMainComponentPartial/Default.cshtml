@@ -1,0 +1,108 @@
+﻿@using System.Globalization
+@model Tuple<List<BestSellerProductDto>, UserInfoDto>
+
+@{
+    var product = Model.Item1;
+    var userInfo = Model.Item2;
+}
+<div class="slider-container">
+    @if (Model != null && product.Count != 0)
+    {
+        <button class="slider-arrow slider-arrow-left">&#10094;</button>
+        <div class="slider-wrapper">
+            <div class="slider">
+                @foreach (var item in product.Take(10))
+                {
+                    <div class="slider-item">
+                        <a href="/Anasayfa/Kategoriler/@FormatForUrl(item.CategoryName)/@FormatForUrl(item.Name)?productId=@item.ProductID" class="slider-product-card-link" style="text-decoration: none">
+                            <div class="slider-card">
+                                <!-- Kart içeriği aynı kalıyor -->
+                                <div class="slider-featured-tag">ÖNE ÇIKAN ÜRÜN</div>
+                                @if (item.Favorites == true && item.Favorites != null && userInfo != null)
+                                {
+                                    <button class="slider-favorite-btn" data-favoritesCardItemID="@item.FavoritesCardItemID" data-favoritesCardID="@item.FavoritesCardID" data-productID="@item.ProductID">
+                                        <i class="fas fa-heart"></i>
+                                    </button>
+                                }
+                                else if (item.Favorites == false && item.Favorites != null && userInfo != null)
+                                {
+                                    <button class="slider-favorite-btn" data-favoritesCardItemID="@item.FavoritesCardItemID" data-favoritesCardID="@item.FavoritesCardID" data-productID="@item.ProductID">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                }
+                                else
+                                {
+                                    <a href="#" class="slider-favorite-btn show-modal-trigger" style="text-decoration:none">
+                                        <i class="far fa-heart"></i>
+                                    </a>
+                                }
+
+                                <div class="slider-product-image-container">
+                                    <img src="@item.ImageUrl" alt="@item.Name" class="slider-product-image" loading="lazy">
+                                </div>
+                                <div class="slider-card-content">
+                                    <h3 class="slider-product-title">@item.Name</h3>
+                                    <p class="slider-product-description">@item.Description</p>
+                                    <div class="slider-price-section">
+                                        @if (item.SaleSeason && item.SalePrice.HasValue)
+                                        {
+                                            <div class="slider-price-container">
+                                                <del>₺@item.Price.ToString("N2", CultureInfo.GetCultureInfo("tr-TR"))</del>
+                                                <span class="slider-sale-price">₺@string.Format(CultureInfo.GetCultureInfo("tr-TR"), "{0:N2}", item.SalePrice)</span>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <span class="slider-normal-price">₺@item.Price.ToString("N2", CultureInfo.GetCultureInfo("tr-TR"))</span>
+                                        }
+                                    </div>
+                                    @if (userInfo != null && userInfo.Roles.Count != 0 && userInfo.Roles != null)
+                                    {
+                                        <button class="slider-add-to-cart-btn" data-product-id="@item.ProductID" data-quantity-id="1">
+                                            <i class="fas fa-cart-plus"></i> Sepete Ekle
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <a href="#" class="slider-add-to-cart-btn show-modal-trigger" style="text-decoration:none">
+                                            <i class="fas fa-cart-plus"></i> Sepete Ekle
+                                        </a>
+                                    }
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+        <button class="slider-arrow slider-arrow-right">&#10095;</button>
+    }
+    else
+    {
+        <div style="display: flex; justify-content: center; align-items: center; height: 5vh;">
+            <b style="color: red;">Öne Çıkan bulunmamaktadır</b>
+        </div>
+    }
+</div>
+
+@functions {
+    public string FormatForUrl(string text)
+    {
+        if (string.IsNullOrEmpty(text))
+            return string.Empty;
+
+        text = text.ToLower(System.Globalization.CultureInfo.GetCultureInfo("tr-TR"));
+        var turkishChars = "ığüşöç";
+        var englishChars = "igusoc";
+
+        for (int i = 0; i < turkishChars.Length; i++)
+        {
+            text = text.Replace(turkishChars[i], englishChars[i]);
+        }
+
+        text = System.Text.RegularExpressions.Regex.Replace(text, @"[^a-z0-9\s-]", "");
+        text = text.Replace(" ", "-");
+        text = System.Text.RegularExpressions.Regex.Replace(text, @"-+", "-");
+        return text.Trim('-');
+    }
+}

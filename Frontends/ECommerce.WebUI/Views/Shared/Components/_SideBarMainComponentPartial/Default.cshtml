@@ -1,0 +1,95 @@
+﻿<!-- Desktop Sidebar -->
+<div class="sidebar">
+    <div class="sidebar-header">
+        <div class="nav-logo">
+            <div class="logo">
+                <a href="/Anasayfa"><img src="~/logo/amazon_logo.png" alt="Site Logo"></a>
+            </div>
+        </div>
+        <i class="fas fa-times close-sidebar"></i>
+    </div>
+    <div class="sidebar-content">
+        <a href="/Anasayfa" class="sidebar-item">
+            <i class="fas fa-home"></i>
+            <span>Anasayfa</span>
+        </a>
+        <a href="/Anasayfa/Siparislerim" class="sidebar-item">
+            <i class="fas fa-box"></i>
+            <span>Siparişlerim</span>
+        </a>
+        <a href="/Anasayfa/Favoriler" class="sidebar-item">
+            <i class="fas fa-heart"></i>
+            <span>Favorilerim</span>
+        </a>
+        <div class="sidebar-category">
+            <div class="category-header">
+                <i class="fas fa-list"></i>
+                <span>Kategoriler</span>
+                <i class="fas fa-chevron-down category-arrow"></i>
+            </div>
+            <div class="category-content">
+                @await Component.InvokeAsync("_SidebarCategoryListComponentPartial")
+            </div>
+        </div>
+        <a href="/Anasayfa/OneCikanlar" class="sidebar-item">
+            <i class="fas fa-chart-line"></i>
+            <span>Trend Ürünler</span>
+        </a>
+        <a href="/Anasayfa/Yardim" class="sidebar-item">
+            <i class="fas fa-question-circle"></i>
+            <span>Yardım</span>
+        </a>
+        <a href="/Login/CikisYap" class="sidebar-item logout">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Çıkış Yap</span>
+        </a>
+    </div>
+</div>
+
+<!-- Mobile Sidebar -->
+<div class="mobile-sidebar">
+    <div class="mobile-sidebar-header">
+        <div class="nav-logo">
+            <div class="logo">
+                <a href="/Anasayfa"><img src="~/logo/amazon_logo.png" alt="Site Logo"></a>
+            </div>
+        </div>
+        <i class="fas fa-times close-mobile-sidebar"></i>
+    </div>
+    <div class="mobile-sidebar-content">
+        <a href="/Anasayfa" class="sidebar-item">
+            <i class="fas fa-home"></i>
+            <span>Anasayfa</span>
+        </a>
+        <a href="/Anasayfa/Siparislerim" class="sidebar-item">
+            <i class="fas fa-box"></i>
+            <span>Siparişlerim</span>
+        </a>
+        <a href="/Anasayfa/Favoriler" class="sidebar-item">
+            <i class="fas fa-heart"></i>
+            <span>Favorilerim</span>
+        </a>
+        <div class="sidebar-category">
+            <div class="category-header">
+                <i class="fas fa-list"></i>
+                <span>Kategoriler</span>
+                <i class="fas fa-chevron-down category-arrow"></i>
+            </div>
+            <div class="category-content">
+                @await Component.InvokeAsync("_SidebarCategoryListComponentPartial")
+            </div>
+        </div>
+        <a href="/Ansayfa/OneCikanlar" class="sidebar-item">
+            <i class="fas fa-chart-line"></i>
+            <span>Trend Ürünler</span>
+        </a>
+        <a href="/Anasayfa/Yardim" class="sidebar-item">
+            <i class="fas fa-question-circle"></i>
+            <span>Yardım</span>
+        </a>
+        <a href="/Login/CikisYap" class="sidebar-item logout">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Çıkış Yap</span>
+        </a>
+    </div>
+</div>

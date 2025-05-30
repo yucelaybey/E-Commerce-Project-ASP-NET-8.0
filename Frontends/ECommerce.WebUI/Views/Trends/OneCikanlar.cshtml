@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "OneCikanlar";
+    Layout = "~/Views/UILayout/UICategoryProductListLayout.cshtml";
+}
+
+<!-- Breadcrumb (Anasayfa > Trend Ürünler) -->
+@await Component.InvokeAsync("_BreadCrumbTrendComponentPartial")
+
+<!-- Trend Ürünler Sayfası İçeriği -->
+<div class="trend-products-page">
+
+    @await Component.InvokeAsync("_FilterTrendComponentPartial")
+
+
+    <!-- Ürün Kartları -->
+    @await Component.InvokeAsync("_ProductTrendComponentPartial")
+
+</div>
+
+
+

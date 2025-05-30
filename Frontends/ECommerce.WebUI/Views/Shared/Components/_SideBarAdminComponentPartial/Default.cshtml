@@ -1,0 +1,33 @@
+﻿<!-- Sidebar -->
+<aside class="sidebar">
+    <div class="sidebar-header">
+        <div class="brand-logo">
+            <a style="text-decoration:none;" href="/Anasayfa"><img src="~/logo/amazon_logo.png" alt="Admin Panel Logo" class="sidebar-logo"></a>
+        </div>
+        <button class="close-sidebar">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <nav class="sidebar-nav">
+        <a href="/YoneticiPaneli/Anasayfa" class="nav-item active">
+            <i class="fas fa-home"></i>
+            <span>Anasayfa</span>
+            <div class="active-indicator"></div>
+        </a>
+        <a href="/YoneticiPaneli/Kategoriler" class="nav-item">
+            <i class="fas fa-list"></i>
+            <span>Kategoriler</span>
+        </a>
+        <a href="/YoneticiPaneli/Urunler" class="nav-item">
+            <i class="fas fa-box"></i>
+            <span>Ürünler</span>
+        </a>
+        <a href="/YoneticiPaneli/Siparisler" class="nav-item">
+            <i class="fas fa-box-open"></i>
+            <span>Siparişler</span>
+        </a>
+    </nav>
+
+    @await Component.InvokeAsync("_UserAdminComponentPartial")
+</aside>

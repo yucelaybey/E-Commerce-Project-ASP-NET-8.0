@@ -1,0 +1,154 @@
+﻿/* AMAZON STYLE AUTH MODAL - ÖZEL STİL */
+.amz-auth-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+}
+
+.amz-auth-modal-content {
+    background: white;
+    border-radius: 8px;
+    width: 400px;
+    max-width: 95%;
+    padding: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+    animation: amz-modal-fade 0.3s ease;
+    border-top: 4px solid #ff9900;
+}
+
+@keyframes amz-modal-fade {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.amz-close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 24px;
+    color: #888;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+    .amz-close-modal:hover {
+        color: #333;
+        transform: rotate(90deg);
+    }
+
+.amz-modal-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.amz-modal-icon {
+    font-size: 48px;
+    color: #ff9900;
+    margin-bottom: 15px;
+}
+
+.amz-modal-title {
+    color: #131921;
+    font-size: 1.5rem;
+    margin: 10px 0 5px;
+}
+
+.amz-modal-body {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.amz-modal-text {
+    color: #555;
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+.amz-modal-footer {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.amz-modal-btn {
+    padding: 12px 30px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    display: inline-block;
+    text-align: center;
+    min-width: 140px;
+    font-size: 1rem;
+}
+
+.amz-login-btn {
+    background-color: #ff9900;
+    color: white;
+    border: 2px solid #ff9900;
+}
+
+    .amz-login-btn:hover {
+        background-color: #e68a00;
+        border-color: #e68a00;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+.amz-register-btn {
+    background-color: white;
+    color: #131921;
+    border: 2px solid #131921;
+}
+
+    .amz-register-btn:hover {
+        background-color: #131921;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+/* RESPONSIVE TASARIM */
+@media (max-width: 480px) {
+    .amz-auth-modal-content {
+        padding: 25px 20px;
+    }
+
+    .amz-modal-footer {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .amz-modal-btn {
+        width: 100%;
+        padding: 12px;
+    }
+
+    .amz-modal-icon {
+        font-size: 40px;
+    }
+
+    .amz-modal-title {
+        font-size: 1.3rem;
+    }
+
+    .amz-modal-text {
+        font-size: 1rem;
+    }
+}

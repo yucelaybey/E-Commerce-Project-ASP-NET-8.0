@@ -1,0 +1,74 @@
+﻿@model UserInfoDto
+<!-- Yeni Top Navigation Bar -->
+<nav class="top-nav">
+    <div class="container">
+        <div class="nav-left">
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <a href="/Anasayfa" class="home-btn">
+                <i class="fas fa-home"></i>
+                <span class="desktop-text">Anasayfa</span>
+            </a>
+            <div class="nav-links">
+                <a href="/Anasayfa/Siparislerim"><i class="fas fa-box"></i> <span class="desktop-text">Siparişlerim</span></a>
+                <a href="/Anasayfa/Favoriler"><i class="fas fa-heart"></i> <span class="desktop-text">Favoriler</span></a>
+                <a href="/Anasayfa/Yardim"><i class="fas fa-question-circle"></i> <span class="desktop-text">Yardım</span></a>
+            </div>
+        </div>
+        <div class="nav-right">
+            @if (Model != null && Model.Roles.Count != 0 && Model.Roles != null)
+            {
+                <div class="user-dropdown">
+                    <div class="user-info">
+                        <i class="fas fa-user-circle user-icon"></i>
+                        <span class="username">@Model.NameSurname</span>
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </div>
+                    <div class="dropdown-menu">
+                        @if (Model.Roles.Contains("Admin"))
+                        {
+                            <a href="/YoneticiPaneli/Anasayfa">
+                                <i class="fas fa-lock"></i>
+                                <span>Admin Paneli</span>
+                            </a>
+                        }
+                        <a href="/Anasayfa/Hesabim"><i class="fas fa-user"></i> Hesabım</a>
+                        <a href="/Anasayfa/Siparislerim"><i class="fas fa-box"></i> Siparişlerim</a>
+                        <a href="/Anasayfa/Favoriler"><i class="fas fa-heart"></i> Favorilerim</a>
+                        <a href="/Login/CikisYap"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <a href="/Login/GirisYap"><button class="nav-btn">Giriş Yap</button></a>
+                <a href="/Login/KayitOl"><button class="nav-btn">Kayıt Ol</button></a>
+            }
+        </div>
+    </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu-overlay"></div>
+<div class="mobile-menu">
+    <div class="mobile-menu-header">
+        <h3>Menü</h3>
+        <button class="mobile-menu-close"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="mobile-menu-content">
+        <a href="/Anasayfa"><i class="fas fa-home"></i> Anasayfa</a>
+        @if (Model.Roles.Contains("Admin"))
+        {
+            <a href="/YoneticiPaneli/Anasayfa">
+                <i class="fas fa-lock"></i>
+                <span>Admin Paneli</span>
+            </a>
+        }
+        <a href="/Anasayfa/Hesabim"><i class="fas fa-user"></i> Hesabım</a>
+        <a href="/Anasayfa/Siparislerim"><i class="fas fa-box"></i> Siparişlerim</a>
+        <a href="/Anasayfa/Favoriler"><i class="fas fa-heart"></i> Favoriler</a>
+        <a href="/Anasayfa/Yardim"><i class="fas fa-question-circle"></i> Yardım</a>
+        <a href="/Login/Logout"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
+    </div>
+</div>

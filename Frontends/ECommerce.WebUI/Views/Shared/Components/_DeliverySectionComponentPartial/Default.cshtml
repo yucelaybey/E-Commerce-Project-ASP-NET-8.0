@@ -1,0 +1,54 @@
+﻿@model List<GetAddressDto>
+<div class="delivery-section">
+    <h2><i class="fas fa-truck"></i> Teslimat Bilgileri</h2>
+
+    @if (Model != null && Model.Any())
+    {
+        var defaultAddress = Model.FirstOrDefault(x => x.IsDefault);
+
+        @if (defaultAddress != null)
+        {
+            <div class="address-card selected" data-address-id="@defaultAddress.AddressID">
+                <div class="address-header">
+                    <h3>@defaultAddress.NameSurname</h3>
+                    <span class="default-badge">Varsayılan</span>
+                </div>
+                <p>@defaultAddress.AddressDetails</p>
+                <p>@defaultAddress.Town/@defaultAddress.City</p>
+                <p>@FormatPhone(defaultAddress.PhoneNumber)</p>
+                <button class="change-address" id="changeAddressBtn">Adresi Değiştir</button>
+            </div>
+        }
+        else
+        {
+            <p>Varsayılan bir adresiniz bulunmamaktadır. Lütfen Varsayılan adres seç diyerek bir adresinizi seçiniz.</p>
+            <button class="change-address" id="changeAddressBtn">Varsayılan Adres Seç</button>
+        }
+    }
+    else
+    {
+        <div class="no-address" style="display: block;">
+            <div class="warning-box">
+                <i class="fas fa-exclamation-circle"></i>
+                <p>Adres bilgisi bulunamadı. Lütfen HESABIM kısmından adres ekleyin.</p>
+            </div>
+            <a href="/Anasayfa/Hesabim" class="btn btn-theme">
+                <i class="fas fa-plus-circle me-2"></i>
+                Adres Ekle
+            </a>
+        </div>
+    }
+</div>
+
+@{
+    string FormatPhone(string phone)
+    {
+        if (string.IsNullOrEmpty(phone)) return phone;
+        phone = phone.Replace("+90", "").Trim();
+        if (phone.Length == 10)
+        {
+            return $"+90 {phone.Substring(0, 3)} {phone.Substring(3, 3)} {phone.Substring(6)}";
+        }
+        return $"+90 {phone}";
+    }
+}

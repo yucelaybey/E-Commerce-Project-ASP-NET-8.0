@@ -1,0 +1,239 @@
+﻿@using System.Globalization
+@model List<GetProductDto>
+
+<div class="card">
+    <div class="card-header">
+        <h3>Ürün Yönetimi</h3>
+        <button class="btn btn-accent" id="addProductBtn">
+            <i class="fas fa-plus"></i> Yeni Ürün Ekle
+        </button>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="products-table">
+                <thead>
+                    <tr>
+                        <th>Ürün Resmi</th>
+                        <th>Ürün Adı</th>
+                        <th>Açıklama</th>
+                        <th>Kategori</th>
+                        <th>Stok Adet</th>
+                        <th>Ücret</th>
+                        <th>İndirimli Ücret</th>
+                        <th>İndirim Oranı</th>
+                        <th>İndirim</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Count == 0)
+                    {
+                        <div style="display: flex; justify-content: center; align-items: center; height: 5vh;">
+                            <b style="color: red;">Ürün bulunmamaktadır</b>
+                        </div>
+                    }
+                    else
+                    {
+
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <img src="@item.ImageUrl" alt="Ürün Resmi" class="product-img">
+                                </td>
+                                <td>@item.Name</td>
+                                <td class="description-cell">@item.Description</td>
+                                <td>@item.CategoryName</td>
+                                <td>@item.Stock</td>
+                                <td>₺@string.Format(CultureInfo.GetCultureInfo("tr-TR"), "{0:N2}", item.Price)</td>
+                                <td>₺@string.Format(CultureInfo.GetCultureInfo("tr-TR"), "{0:N2}", item.SalePrice)</td>
+                                <td>@item.DiscountRate</td>
+                                <td><i class="fas fa-tag discount-icon @(item.SaleSeason ? "active" :"")"></i></td>
+                                <td class="actions-cell">
+                                    <button class="btn-icon btn-edit" data-id="@item.ProductID">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon btn-delete" data-id="@item.ProductID">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Ürün Ekleme Modalı -->
+<div class="modal" id="addProductModal">
+    <div class="modal-content">
+        <div class="modal-scroll">
+            <div class="modal-header">
+                <h4>Yeni Ürün Ekle</h4>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="addProductForm">
+                    <div class="form-group">
+                        <label for="productImage">Ürün Resmi <span class="required">*</span></label>
+                        <div class="image-upload-container">
+                            <div class="image-upload-area" id="productImageUpload">
+                                <div class="image-upload-content">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <p>Resmi sürükleyip bırakın veya tıklayarak seçin</p>
+                                    <input type="file" id="productImage" accept="image/*" required>
+                                </div>
+                                <div class="image-preview" id="productImagePreview">
+                                    <img id="productImagePreviewImg" src="" alt="Önizleme">
+                                    <div class="image-overlay">
+                                        <span><i class="fas fa-sync-alt"></i> Yeni Resim Yükle</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="validation-message" id="productImageValidation"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="productName">Ürün Adı <span class="required">*</span></label>
+                        <input type="text" id="productName" class="form-control" required>
+                        <span class="validation-message" id="productNameValidation"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="productDescription">Açıklama <span class="required">*</span></label>
+                        <textarea id="productDescription" class="form-control" rows="3" required></textarea>
+                        <span class="validation-message" id="productDescriptionValidation"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="productCategory">Kategori <span class="required">*</span></label>
+                        <select id="productCategory" class="form-control" required>
+                            <option value="">Seçiniz</option>
+                        </select>
+                        <span class="validation-message" id="productCategoryValidation"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="productStock">Stok Adet <span class="required">*</span></label>
+                        <input type="number" id="productStock" class="form-control" required min="0">
+                        <span class="validation-message" id="productStockValidation"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="productPrice">Ücret (₺) <span class="required">*</span></label>
+                        <input type="number" id="productPrice" class="form-control" required min="0" step="0.01">
+                        <span class="validation-message" id="productPriceValidation"></span>
+                    </div>
+                    <div class="form-group toggle-container">
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="discountToggle">
+                            <span class="slider round"></span>
+                            <span class="toggle-label">İndirim Uygula</span>
+                        </label>
+                    </div>
+                    <div class="discount-fields" style="display: none;">
+                        <div class="form-group">
+                            <label for="discountedPrice">İndirimli Ücret (₺) <span class="required discount-required">*</span></label>
+                            <input type="number" id="discountedPrice" class="form-control" min="0" step="0.01">
+                            <span class="validation-message" id="discountedPriceValidation"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="discountRate">İndirim Oranı (%) <span class="required discount-required">*</span></label>
+                            <input type="number" id="discountRate" class="form-control" readonly>
+                            <span class="validation-message" id="discountRateValidation"></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary close-modal">İptal</button>
+                <button type="button" class="btn btn-accent" id="saveProductBtn">Kaydet</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Ürün Düzenleme Modalı -->
+<div class="modal" id="editProductModal">
+    <div class="modal-content">
+        <div class="modal-scroll">
+            <div class="modal-header">
+                <h4>Ürün Düzenle</h4>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="editProductForm">
+                    <input type="hidden" id="editProductId">
+                    <div class="form-group">
+                        <label for="editProductImage">Ürün Resmi <span class="required">*</span></label>
+                        <div class="image-upload-container">
+                            <div class="image-upload-area" id="editProductImageUpload">
+                                <div class="image-upload-content">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <p>Resmi sürükleyip bırakın veya tıklayarak seçin</p>
+                                    <input type="file" id="editProductImage" accept="image/*">
+                                </div>
+                                <div class="image-preview" id="editProductImagePreview">
+                                    <img id="editProductImagePreviewImg" src="" alt="Önizleme">
+                                    <div class="image-overlay">
+                                        <span><i class="fas fa-sync-alt"></i> Yeni Resim Yükle</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="validation-message" id="editProductImageValidation"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="editProductName">Ürün Adı <span class="required">*</span></label>
+                        <input type="text" id="editProductName" class="form-control" required>
+                        <span class="validation-message" id="editProductNameValidation"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="editProductDescription">Açıklama <span class="required">*</span></label>
+                        <textarea id="editProductDescription" class="form-control" rows="3" required></textarea>
+                        <span class="validation-message" id="editProductDescriptionValidation"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="editProductCategory">Kategori <span class="required">*</span></label>
+                        <select id="editProductCategory" class="form-control" required>
+                            <option value="">Seçiniz</option>
+                        </select>
+                        <span class="validation-message" id="editProductCategoryValidation"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="editProductStock">Stok Adet <span class="required">*</span></label>
+                        <input type="number" id="editProductStock" class="form-control" required min="0">
+                        <span class="validation-message" id="editProductStockValidation"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="editProductPrice">Ücret (₺) <span class="required">*</span></label>
+                        <input type="number" id="editProductPrice" class="form-control" required min="0" step="0.01">
+                        <span class="validation-message" id="editProductPriceValidation"></span>
+                    </div>
+                    <div class="form-group toggle-container">
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="editDiscountToggle">
+                            <span class="slider round"></span>
+                            <span class="toggle-label">İndirim Uygula</span>
+                        </label>
+                    </div>
+                    <div class="edit-discount-fields" style="display: none;">
+                        <div class="form-group">
+                            <label for="editDiscountedPrice">İndirimli Ücret (₺) <span class="required discount-required">*</span></label>
+                            <input type="number" id="editDiscountedPrice" class="form-control" min="0" step="0.01">
+                            <span class="validation-message" id="editDiscountedPriceValidation"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="editDiscountRate">İndirim Oranı (%) <span class="required discount-required">*</span></label>
+                            <input type="number" id="editDiscountRate" class="form-control" readonly>
+                            <span class="validation-message" id="editDiscountRateValidation"></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary close-modal">İptal</button>
+                <button type="button" class="btn btn-accent" id="updateProductBtn">Güncelle</button>
+            </div>
+        </div>
+    </div>
+</div>

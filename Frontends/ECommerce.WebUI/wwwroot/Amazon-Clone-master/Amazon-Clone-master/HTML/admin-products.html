@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ürün İşlemleri</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="admin-products.css"> <!-- Ürün İşlemleri için CSS -->
+    <link rel="stylesheet" href="admin-dashboard.css"> <!-- Yeni CSS dosyası -->
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <div class="admin-sidebar">
+        <div class="sidebar-header">
+            <h3>Admin Paneli</h3>
+        </div>
+        <div class="sidebar-menu">
+            <a href="admin-dashboard.html" class="sidebar-item">
+                <i class="fas fa-home"></i> Anasayfa
+            </a>
+            <a href="admin-categories.html" class="sidebar-item">
+                <i class="fas fa-list"></i> Kategori İşlemleri
+            </a>
+            <a href="admin-products.html" class="sidebar-item active">
+                <i class="fas fa-box"></i> Ürün İşlemleri
+            </a>
+            <a href="admin-settings.html" class="sidebar-item">
+                <i class="fas fa-cog"></i> Hesap Ayarları
+            </a>
+        </div>
+        <!-- Kullanıcı Bilgisi -->
+        <div class="user-info">
+            <div class="user-name">
+                <i class="fas fa-user"></i> Ahmet Yılmaz
+            </div>
+            <div class="user-email">
+                <i class="fas fa-envelope"></i> ahmet.yilmaz@example.com
+            </div>
+            <div class="login-time">
+                <i class="fas fa-clock"></i> 25 Ekim 2023, 14:30
+            </div>
+        </div>
+    </div>
+
+    <!-- Ana İçerik -->
+    <div class="admin-main-content">
+        <!-- Geri Dön Butonu -->
+        <div class="back-to-home">
+            <a href="index.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Ana Sayfaya Dön
+            </a>
+        </div>
+
+        <!-- Onay İstemeden Sil Kutucuğu -->
+        <div class="delete-checkbox">
+            <label>
+                <input type="checkbox" id="deleteWithoutConfirmation"> Onay istemeden sil
+            </label>
+        </div>
+
+        <!-- Ürün Ekle Butonu -->
+        <div class="add-product">
+            <button class="add-btn" id="openAddModal">
+                <i class="fas fa-plus"></i> Ürün Ekle
+            </button>
+        </div>
+
+        <!-- Ürünler Tablosu -->
+        <div class="products-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Ürün Resmi</th>
+                        <th>Ürün Adı</th>
+                        <th>Açıklama</th>
+                        <th>Kategori</th>
+                        <th>Stok Durumu</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Örnek Ürün -->
+                    <tr>
+                        <td>
+                            <img src="product1.jpg" alt="Ürün 1" class="product-image">
+                        </td>
+                        <td>Ürün 1</td>
+                        <td>Bu ürün harika bir özelliğe sahiptir.</td>
+                        <td>Elektronik</td>
+                        <td>100 Adet</td>
+                        <td>
+                            <button class="update-btn warning" id="openUpdateModal">
+                                <i class="fas fa-edit"></i> Güncelle
+                            </button>
+                            <button class="delete-btn danger" data-product-id="1" data-product-name="Ürün 1" data-product-image="product1.jpg">
+                                <i class="fas fa-trash"></i> Sil
+                            </button>
+                        </td>
+                    </tr>
+                    <!-- Veri yoksa -->
+                    <tr class="no-data">
+                        <td colspan="6">Ürün bulunmamaktadır.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="admin-footer">
+        <div class="footer-bottom">
+            <p>Tüm hakları saklıdır @ 2024</p>
+        </div>
+    </footer>
+
+    <!-- Ürün Ekle Modal -->
+    <div class="modal" id="addModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Ürün Ekle</h2>
+            <form id="addProductForm">
+                <div class="form-group">
+                    <label for="productImage">Ürün Resmi</label>
+                    <div class="image-upload-container">
+                        <div class="image-preview" id="imagePreview">
+                            <i class="fas fa-image image-icon"></i>
+                            <div class="upload-overlay">
+                                <span>Yeni Resim Ekle</span>
+                            </div>
+                            <input type="file" id="productImage" accept="image/*" class="file-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="productName">Ürün Adı</label>
+                    <input type="text" id="productName" placeholder="Ürün adı girin">
+                </div>
+                <div class="form-group">
+                    <label for="productDescription">Açıklama</label>
+                    <textarea id="productDescription" placeholder="Ürün açıklaması girin"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="productCategory">Kategori</label>
+                    <select id="productCategory">
+                        <option value="elektronik">Elektronik</option>
+                        <option value="giyim">Giyim</option>
+                        <option value="ev-yasam">Ev & Yaşam</option>
+                        <option value="kitap">Kitap</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="productStock">Stok Durumu</label>
+                    <input type="number" id="productStock" placeholder="Stok miktarı girin">
+                </div>
+                <button type="submit" class="submit-btn">Ürün Ekle</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Ürün Güncelle Modal -->
+    <div class="modal" id="updateModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Ürün Güncelle</h2>
+            <form id="updateProductForm">
+                <div class="form-group">
+                    <label for="updateProductImage">Ürün Resmi</label>
+                    <div class="image-upload-container">
+                        <div class="image-preview" id="updateImagePreview">
+                            <img src="product1.jpg" alt="Resim Önizleme" id="updatePreviewImage">
+                            <div class="upload-overlay">
+                                <span>Yeni Resim Ekle</span>
+                            </div>
+                            <input type="file" id="updateProductImage" accept="image/*" class="file-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="updateProductName">Ürün Adı</label>
+                    <input type="text" id="updateProductName" value="Ürün 1">
+                </div>
+                <div class="form-group">
+                    <label for="updateProductDescription">Açıklama</label>
+                    <textarea id="updateProductDescription">Bu ürün harika bir özelliğe sahiptir.</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="updateProductCategory">Kategori</label>
+                    <select id="updateProductCategory">
+                        <option value="elektronik">Elektronik</option>
+                        <option value="giyim">Giyim</option>
+                        <option value="ev-yasam">Ev & Yaşam</option>
+                        <option value="kitap">Kitap</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="updateProductStock">Stok Durumu</label>
+                    <input type="number" id="updateProductStock" value="100">
+                </div>
+                <button type="submit" class="submit-btn">Güncelle</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Silme Onay Modal -->
+    <div class="modal" id="deleteModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Ürün Sil</h2>
+            <div class="delete-modal-content">
+                <img src="" alt="Ürün Resmi" id="deleteProductImage">
+                <p id="deleteProductName"></p>
+                <p>Bu ürünü silmek istediğinize emin misiniz?</p>
+            </div>
+            <div class="modal-actions">
+                <button class="cancel-btn">İptal</button>
+                <button class="confirm-delete-btn danger">Sil</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="admin-products.js"></script> <!-- Ürün İşlemleri için JS -->
+</body>
+
+</html>

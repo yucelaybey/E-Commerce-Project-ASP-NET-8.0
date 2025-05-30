@@ -1,0 +1,59 @@
+﻿@model List<GetCityDto>
+<!-- Add Address Modal -->
+<div class="modal" id="addAddressModal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2><i class="fas fa-map-marker-plus"></i> Yeni Adres Ekle</h2>
+        <form id="addAddressForm">
+            <div class="form-group">
+                <label>Adres Başlığı</label>
+                <input type="text" id="addressTitle" placeholder="Örnek: Ev, İş" required>
+            </div>
+            <div class="form-group">
+                <label>Ad Soyad</label>
+                <input type="text" id="addressFullName" placeholder="Ad Soyad" required>
+            </div>
+            <div class="form-group">
+                <label>Telefon</label>
+                <input type="tel" id="addressPhone" placeholder="+90 5__ ___ __ __" required>
+            </div>
+            <div class="form-group">
+                <label>İl</label>
+                <select id="addressCity" required>
+                    <option value="">Seçiniz</option>
+                    @foreach (var city in Model)
+                    {
+                        <option value="@city.CityId">@city.CityName</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label>İlçe</label>
+                <select id="addressDistrict" required disabled>
+                    <option value="">İl seçiniz</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Semt</label>
+                <select id="addressNeighborhood" required disabled>
+                    <option value="">İlçe seçiniz</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Mahalle</label>
+                <select id="addressQuarter" required disabled>
+                    <option value="">Semt seçiniz</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Adres</label>
+                <textarea id="addressDetails" rows="3" placeholder="Adres detayları" required></textarea>
+            </div>
+            <div class="form-checkbox">
+                <input type="checkbox" id="setDefaultAddress">
+                <label for="setDefaultAddress">Varsayılan adres olarak ayarla</label>
+            </div>
+            <button type="submit" class="save-btn">Adresi Kaydet</button>
+        </form>
+    </div>
+</div>

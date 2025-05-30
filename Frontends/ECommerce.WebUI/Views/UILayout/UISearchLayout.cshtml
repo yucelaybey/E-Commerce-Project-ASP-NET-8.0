@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+
+@await Component.InvokeAsync("_HeadSearchPageComponentPartial")
+<body>
+    <!-- Top Bar -->
+    @await Component.InvokeAsync("_HeaderMainComponentPartial")
+
+    <!-- Sidebar (Masaüstü) -->
+    @await Component.InvokeAsync("_SideBarMainComponentPartial")
+
+    <!-- Ana İçerik -->
+    <div class="main-content">
+        @RenderBody()
+    </div>
+
+    <!-- Footer -->
+    @await Component.InvokeAsync("_FooterMainComponentPartial")
+
+    @await Component.InvokeAsync("_ScriptMainComponentPartial")
+
+    @await Component.InvokeAsync("_WarningModalComponentPartial")
+</body>
+
+</html>

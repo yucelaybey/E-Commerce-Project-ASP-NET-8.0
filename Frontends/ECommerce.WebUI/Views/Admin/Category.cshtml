@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewData["Title"] = "UILayouAt";
+    Layout = "~/Views/UILayout/UILayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+
+@await Component.InvokeAsync("_HeadAdminCategoryComponentPartial")
+
+<body>
+    <!-- Ana İçerik -->
+    @await Component.InvokeAsync("_MainAdminCategoryComponentPartial")
+
+    @await Component.InvokeAsync("_CategoryScriptComponentPartial")
+</body>
+
+</html>

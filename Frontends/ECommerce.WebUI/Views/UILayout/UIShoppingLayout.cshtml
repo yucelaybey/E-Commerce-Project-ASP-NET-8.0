@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+
+@await Component.InvokeAsync("_HeadShoppingPartialComponent")
+
+<body>
+
+    @await Component.InvokeAsync("_TopBarShoppingComponentPartial")
+
+    @await Component.InvokeAsync("_HeaderShoppingPartialComponent")
+
+    @RenderBody()
+
+    @await Component.InvokeAsync("_FooterMainComponentPartial")
+    <!-- Scriptlerin doğru sırada yüklenmesi için -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Proje scriptleri -->
+    <script src="~/js/favoritesAdd.js" asp-append-version="true"></script>
+    <script src="~/js/sepetEkle.js" asp-append-version="true"></script>
+    <script src="~/js/sepet.js" asp-append-version="true"></script>
+</body>
+
+</html>

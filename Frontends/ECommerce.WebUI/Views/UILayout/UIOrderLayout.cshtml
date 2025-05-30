@@ -1,0 +1,28 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+
+@await Component.InvokeAsync("_HeadOrdersComponentPartial")
+
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div class="spinner"></div>
+        <p>Sipariş bilgileri yükleniyor...</p>
+    </div>
+
+    @await Component.InvokeAsync("_TopBarShoppingComponentPartial")
+
+    @RenderBody()
+
+    @await Component.InvokeAsync("_FooterMainComponentPartial")
+
+    <script src="~/js/sepet.js"></script>
+    <script src="~/js/orders.js"></script>
+    <script src="~/js/orderFilter.js"></script>
+</body>
+</html>

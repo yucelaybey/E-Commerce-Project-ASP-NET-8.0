@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kategori İşlemleri</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="admin-categories.css"> <!-- Kategori İşlemleri için CSS -->
+    <link rel="stylesheet" href="admin-dashboard.css"> <!-- Yeni CSS dosyası -->
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <div class="admin-sidebar">
+        <div class="sidebar-header">
+            <h3>Admin Paneli</h3>
+        </div>
+        <div class="sidebar-menu">
+            <a href="admin-dashboard.html" class="sidebar-item">
+                <i class="fas fa-home"></i> Anasayfa
+            </a>
+            <a href="admin-categories.html" class="sidebar-item active">
+                <i class="fas fa-list"></i> Kategori İşlemleri
+            </a>
+            <a href="admin-products.html" class="sidebar-item">
+                <i class="fas fa-box"></i> Ürün İşlemleri
+            </a>
+            <a href="admin-settings.html" class="sidebar-item">
+                <i class="fas fa-cog"></i> Hesap Ayarları
+            </a>
+        </div>
+        <!-- Kullanıcı Bilgisi -->
+        <div class="user-info">
+            <div class="user-name">
+                <i class="fas fa-user"></i> Ahmet Yılmaz
+            </div>
+            <div class="user-email">
+                <i class="fas fa-envelope"></i> ahmet.yilmaz@example.com
+            </div>
+            <div class="login-time">
+                <i class="fas fa-clock"></i> 25 Ekim 2023, 14:30
+            </div>
+        </div>
+    </div>
+
+    <!-- Ana İçerik -->
+    <div class="admin-main-content">
+        <!-- Geri Dön Butonu -->
+        <div class="back-to-home">
+            <a href="index.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Ana Sayfaya Dön
+            </a>
+        </div>
+
+        <!-- Onay İstemeden Sil Kutucuğu -->
+        <div class="delete-checkbox">
+            <label>
+                <input type="checkbox" id="deleteWithoutConfirmation"> Onay istemeden sil
+            </label>
+        </div>
+
+        <!-- Kategori Ekle Butonu -->
+        <div class="add-category">
+            <button class="add-btn" id="openAddModal">
+                <i class="fas fa-plus"></i> Kategori Ekle
+            </button>
+        </div>
+
+        <!-- Kategoriler Tablosu -->
+        <div class="categories-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Kategori Resmi</th>
+                        <th>Kategori Adı</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Örnek Kategori -->
+                    <tr>
+                        <td>
+                            <img src="category1.jpg" alt="Kategori 1" class="category-image">
+                        </td>
+                        <td>Elektronik</td>
+                        <td>
+                            <button class="update-btn warning" id="openUpdateModal">
+                                <i class="fas fa-edit"></i> Güncelle
+                            </button>
+                            <button class="delete-btn danger" data-category-id="1" data-category-name="Elektronik" data-category-image="category1.jpg">
+                                <i class="fas fa-trash"></i> Sil
+                            </button>
+                        </td>
+                    </tr>
+                    <!-- Veri yoksa -->
+                    <tr class="no-data">
+                        <td colspan="3">Kategori bulunmamaktadır.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="admin-footer">
+        <div class="footer-bottom">
+            <p>Tüm hakları saklıdır @ 2024</p>
+        </div>
+    </footer>
+
+    <!-- Kategori Ekle Modal -->
+    <div class="modal" id="addModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Kategori Ekle</h2>
+            <form id="addCategoryForm">
+                <div class="form-group">
+                    <label for="categoryImage">Kategori Resmi</label>
+                    <div class="image-upload-container">
+                        <div class="image-preview" id="imagePreview">
+                            <i class="fas fa-image image-icon"></i>
+                            <div class="upload-overlay">
+                                <span>Yeni Resim Ekle</span>
+                            </div>
+                            <input type="file" id="categoryImage" accept="image/*" class="file-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="categoryName">Kategori Adı</label>
+                    <input type="text" id="categoryName" placeholder="Kategori adı girin">
+                </div>
+                <button type="submit" class="submit-btn">Kategori Ekle</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Kategori Güncelle Modal -->
+    <div class="modal" id="updateModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Kategori Güncelle</h2>
+            <form id="updateCategoryForm">
+                <div class="form-group">
+                    <label for="updateCategoryImage">Kategori Resmi</label>
+                    <div class="image-upload-container">
+                        <div class="image-preview" id="updateImagePreview">
+                            <img src="category1.jpg" alt="Resim Önizleme" id="updatePreviewImage">
+                            <div class="upload-overlay">
+                                <span>Yeni Resim Ekle</span>
+                            </div>
+                            <input type="file" id="updateCategoryImage" accept="image/*" class="file-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="updateCategoryName">Kategori Adı</label>
+                    <input type="text" id="updateCategoryName" value="Elektronik">
+                </div>
+                <button type="submit" class="submit-btn">Güncelle</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Silme Onay Modal -->
+    <div class="modal" id="deleteModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Kategori Sil</h2>
+            <div class="delete-modal-content">
+                <img src="" alt="Kategori Resmi" id="deleteCategoryImage">
+                <p id="deleteCategoryName"></p>
+                <p>Bu kategoriyi silmek istediğinize emin misiniz?</p>
+            </div>
+            <div class="modal-actions">
+                <button class="cancel-btn">İptal</button>
+                <button class="confirm-delete-btn danger">Sil</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="admin-categories.js"></script> <!-- Kategori İşlemleri için JS -->
+</body>
+
+</html>

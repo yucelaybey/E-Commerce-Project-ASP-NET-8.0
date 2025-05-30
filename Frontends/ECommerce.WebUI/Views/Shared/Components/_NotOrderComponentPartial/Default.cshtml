@@ -1,0 +1,67 @@
+﻿<div class="empty-orders-container">
+    <div class="empty-orders-content">
+        <div class="empty-orders-icon">
+            <i class="fas fa-box-open"></i>
+        </div>
+        <h3 class="empty-orders-title">Sipariş Bulunamadı</h3>
+        <p class="empty-orders-message">Henüz bir sipariş vermemişsiniz gibi görünüyor. Alışverişe başlamak için ürünleri inceleyebilirsiniz.</p>
+        <a href="/Anasayfa" class="empty-orders-button">
+            <i class="fas fa-shopping-bag"></i> Alışverişe Başla
+        </a>
+    </div>
+</div>
+
+<style>
+    .empty-orders-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 60vh;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .empty-orders-content {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    .empty-orders-icon {
+        font-size: 60px;
+        color: #e0e0e0;
+        margin-bottom: 20px;
+    }
+
+    .empty-orders-title {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: #333;
+    }
+
+    .empty-orders-message {
+        font-size: 16px;
+        color: #666;
+        margin-bottom: 25px;
+        line-height: 1.5;
+    }
+
+    .empty-orders-button {
+        display: inline-block;
+        padding: 12px 25px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        font-weight: 500;
+        transition: background-color 0.3s;
+    }
+
+    .empty-orders-button:hover {
+        background-color: #0056b3;
+    }
+
+    .empty-orders-button i {
+        margin-right: 8px;
+    }
+</style>

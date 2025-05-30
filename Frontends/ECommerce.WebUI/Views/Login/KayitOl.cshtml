@@ -1,0 +1,112 @@
+﻿@model CreateRegisterDto
+@{
+ViewData["Title"] = "KayitOl";
+Layout = "~/Views/UILayout/UILoginLayout.cshtml";
+}
+<div class="auth-container">
+    <h2><i class="fas fa-user-plus"></i> Kayıt Ol</h2>
+<!-- Adım Göstergesi -->
+<div class="step-indicator">
+    <div class="step active" id="step1Indicator">1. Adım</div>
+    <div class="step" id="step2Indicator">2. Adım</div>
+</div>
+
+<!-- 1. Adım Formu -->
+<div class="register-wrapper" id="step1Form">
+    <form class="auth-form" id="step1ValidationForm" novalidate>
+            
+        <div class="input-group">
+            <input type="text" placeholder="Ad Soyad" id="fullName" asp-for="NameSurname" 
+                   oninput="this.value = this.value.replace(/[^a-zA-ZğüşıöçĞÜŞİÖÇ ]/g, '')">
+            <i class="fas fa-user"></i>
+        </div>
+        <div class="input-group">
+            <input type="email" placeholder="E-posta" id="registerEmail" asp-for="Email">
+            <i class="fas fa-envelope"></i>
+        </div>
+        <div class="input-group">
+            <input type="date" placeholder="Doğum Tarihi" id="birthDay" asp-for="BirthDay">
+            <i class="fas fa-calendar-alt"></i>
+        </div>
+        <div class="input-group">
+            <input type="tel" placeholder="Telefon Numarası (+90 555 123 4567)" id="phoneNumber" asp-for="PhoneNumber" 
+                   oninput="formatPhoneNumber(this)">
+            <i class="fas fa-phone"></i>
+        </div>
+        
+        <button type="button" id="nextStepButton" onclick="validateStep1()">İleri <i class="fas fa-arrow-right"></i></button>
+        <p class="switch-text">Zaten hesabın var mı? <a href="/Login/GirisYap">Giriş Yap</a></p>
+    </form>
+</div>
+
+<!-- 2. Adım Formu (Başlangıçta gizli) -->
+<div class="register-wrapper" id="step2Form" style="display: none;">
+    <form class="auth-form" method="post" id="registerForm" novalidate>
+        <input type="hidden" id="hiddenName" asp-for="NameSurname">
+        <input type="hidden" id="hiddenEmail" asp-for="Email">
+        <input type="hidden" id="hiddenBirthDay" asp-for="BirthDay">
+        <input type="hidden" id="hiddenPhoneNumber" asp-for="PhoneNumber">
+        
+        <div class="input-group">
+            <input type="password" placeholder="Şifre" id="registerPassword" asp-for="Password" oninput="checkPasswordRules()">
+            <i class="fas fa-lock toggle-password" onclick="togglePassword('registerPassword', this)"></i>
+        </div>
+        <div class="input-group">
+            <input type="password" placeholder="Şifre Tekrar" id="confirmPassword" oninput="checkPasswordRules()">
+            <i class="fas fa-lock toggle-password" onclick="togglePassword('confirmPassword', this)"></i>
+        </div>
+        
+        <!-- Şifre Kuralları -->
+        <div class="password-rules">
+            <h3>Şifre Kuralları</h3>
+            <div class="password-rule">
+                <i class="fas fa-times-circle rule-invalid" id="lengthIcon"></i>
+                <span>Minimum 8 karakter</span>
+            </div>
+            <div class="password-rule">
+                <i class="fas fa-times-circle rule-invalid" id="upperIcon"></i>
+                <span>En az 1 büyük harf</span>
+            </div>
+            <div class="password-rule">
+                <i class="fas fa-times-circle rule-invalid" id="lowerIcon"></i>
+                <span>En az 1 küçük harf</span>
+            </div>
+            <div class="password-rule">
+                <i class="fas fa-times-circle rule-invalid" id="numberIcon"></i>
+                <span>En az 1 rakam</span>
+            </div>
+            <div class="password-rule">
+                <i class="fas fa-times-circle rule-invalid" id="specialIcon"></i>
+                <span>En az 1 özel karakter (*, +, .)</span>
+            </div>
+            <div class="password-rule">
+                <i class="fas fa-times-circle rule-invalid" id="matchIcon"></i>
+                <span>Şifreler eşleşiyor</span>
+            </div>
+        </div>
+        
+        <div class="terms">
+            <input type="checkbox" id="terms">
+            <label style="color:white;margin-bottom: 20px;" for="terms">Kullanım koşullarını kabul ediyorum</label>
+        </div>
+        
+        <div class="step-buttons">
+            <button type="button" class="back-button" onclick="prevStep()"><i class="fas fa-arrow-left"></i> Geri</button>
+            <button type="button" id="registerButton" onclick="validateStep2()">Kayıt Ol <i class="fas fa-arrow-right"></i></button>
+        </div>
+    </form>
+</div>
+</div>
+<!-- Loading Screen -->
+<div class="loading-overlay" id="loadingOverlay" style="display: none;">
+    <div class="loading-content">
+        <div class="spinner"></div>
+        <p>Kayıt olunuyor. Bilgileriniz kaydediliyor...</p>
+    </div>
+</div>
+<!-- SweetAlert CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<link rel="stylesheet" href="~/css/signup.css">
+<!-- SweetAlert JS -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="~/js/signup.js"></script>

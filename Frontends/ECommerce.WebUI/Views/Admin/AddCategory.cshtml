@@ -1,0 +1,72 @@
+﻿@model CreateCategoryDto
+
+@{
+    ViewData["Title"] = "UILayout";
+    Layout = "~/Views/UILayout/UILayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+
+<!-- Head Component'i Çağır -->
+@await Component.InvokeAsync("_HeadAdminAddProductComponentPartial")
+
+<body>
+
+    <div class="admin-main-content">
+        <!-- Geri Dön Butonu -->
+        <a href="~/YoneticiPaneli/Kategoriler" style="text-decoration: none;">
+            <button class="back-btn">
+                <i class="fas fa-arrow-left"></i> Geri Dön
+            </button>
+        </a>
+
+        <!-- Kategori Ekle Formu -->
+        <div class="form-container">
+            <h2>Kategori Ekle</h2>
+            <form id="addCategoryForm" method="post" enctype="multipart/form-data" asp-action="AddCategory" asp-controller="Admin">
+
+                <!-- Resim Yükleme Kısmı -->
+                <div class="form-group">
+                    <label asp-for="Image">Kategori Resmi</label>
+                    <div class="image-upload-container" id="imageUploadContainer">
+                        <div class="image-preview" id="imagePreview">
+                            <i class="fas fa-image image-icon"></i>
+                            <div class="upload-overlay">
+                                <span>Yeni Resim Ekle</span>
+                            </div>
+                        </div>
+                        <input type="file" asp-for="Image" id="categoryImage" name="Image" accept="image/*" required class="file-input">
+                    </div>
+                    <span asp-validation-for="Image" class="text-danger"></span>
+                    <span id="imageError" class="text-danger" style="display: none; text-align: center; color: red;">Resim boyutu 1:1 (kare) olmalıdır.</span>
+                </div>
+
+                <!-- Kategori Adı -->
+                <div class="form-group">
+                    <label asp-for="Name">Kategori Adı</label>
+                    <input type="text" asp-for="Name" id="categoryName" name="Name" placeholder="Kategori adı girin" required>
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <!-- Kategori Açıklaması -->
+                <div class="form-group">
+                    <label asp-for="Description">Kategori Açıklaması</label>
+                    <textarea asp-for="Description" id="categoryDescription" name="Description" placeholder="Kategori açıklaması girin" rows="4" required></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                
+
+                <!-- Gönder Butonu -->
+                <button type="submit" class="submit-btn">Kategori Ekle</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript Dosyaları -->
+    <script src="~/js/script.js"></script>
+    <script src="~/js/add-category.js"></script>
+</body>
+
+</html>

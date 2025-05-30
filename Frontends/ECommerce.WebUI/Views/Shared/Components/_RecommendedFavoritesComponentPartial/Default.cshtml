@@ -1,0 +1,58 @@
+﻿@using System.Globalization
+@model ProductRecommendationViewModel
+
+<div class="recommended-products">
+    <h2><i class="fas fa-lightbulb"></i> Bunlar da İlginizi Çekebilir</h2>
+    <div class="recommended-slider">
+        @foreach (var item in Model.Products)
+        {
+            <div class="product-card">
+                @if (item.SaleSeason)
+                {
+                    <div class="product-badge">%@Convert.ToInt32(item.DiscountRate)</div>
+                }
+                @if (item.Status == true && item.Status != null && Model.UserInfo != null)
+                {
+                    <button class="slider-favorite-btn" data-favoritesCardItemID="@item.FavoritesCardItemID" data-favoritesCardID="@item.FavoritesCardID" data-productID="@item.ProductID" data-recommended="recommended">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                }
+                else if (item.Status == false && item.Status != null && Model.UserInfo != null)
+                {
+                    <button class="slider-favorite-btn" data-favoritesCardItemID="@item.FavoritesCardItemID" data-favoritesCardID="@item.FavoritesCardID" data-productID="@item.ProductID" data-recommended="recommended">
+                        <i class="far fa-heart"></i>
+                    </button>
+                }
+                else
+                {
+                    <a href="#" class="slider-favorite-btn show-modal-trigger" style="text-decoration:none">
+                        <i class="far fa-heart"></i>
+                    </a>
+                }
+                <div class="product-image">
+                    <img src="@item.ImageUrl" alt="@item.Name">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">@item.Name</h3>
+                    <div class="product-price">
+                        @if (item.SaleSeason)
+                        {
+                            <span class="current-price">₺@string.Format(CultureInfo.GetCultureInfo("tr-TR"), "{0:N2}", item.SalePrice)</span>
+                            <span class="original-price">₺@string.Format(CultureInfo.GetCultureInfo("tr-TR"), "{0:N2}", item.Price)</span>
+                        }
+                        else
+                        {
+                            <span style="color:black" class="current-price">₺@string.Format(CultureInfo.GetCultureInfo("tr-TR"), "{0:N2}", item.Price)</span>
+                        }
+                        
+                    </div>
+                </div>
+                <div class="product-actions">
+                    <button class="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i> Sepete Ekle
+                    </button>
+                </div>
+            </div>
+        }
+    </div>
+</div>

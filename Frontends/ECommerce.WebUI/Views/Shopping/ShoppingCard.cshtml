@@ -1,0 +1,562 @@
+﻿@using System.Globalization
+@model ShoppingCartWithTotalsDto
+@{
+    ViewData["Title"] = "ShoppingCard";
+    Layout = "~/Views/UILayout/UIShoppingLayout.cshtml";
+
+}
+@if (TempData["SuccessMessage"] != null)
+{
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Başarılı',
+            text: '@Html.Raw(TempData["SuccessMessage"])',
+            timer: 3000
+        });
+    </script>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Hata',
+            text: '@Html.Raw(TempData["ErrorMessage"])'
+        });
+    </script>
+}
+<!-- Main Content -->
+<main class="cart-container">
+    <div class="container">
+        <div class="cart-title">
+            <h1><i class="fas fa-shopping-cart"></i> Sepetim</h1>
+            <p>@Model.TrueStatusCount ürün</p>
+            <a href="/Anasayfa" class="continue-shopping">
+                <i class="fas fa-arrow-left"></i> Alışverişe Devam Et
+            </a>
+        </div>
+
+        @if (Model.Items == null || !Model.Items.Any())
+        {
+            <div class="cart-content" style="grid-template-columns: none;">
+                <div class="empty-cart">
+                    <i class="fas fa-shopping-cart fa-5x"></i>
+                    <h3>Sepetiniz Boş</h3>
+                    <p>Alışverişe başlamak için aşağıdaki butonu kullanabilirsiniz</p>
+                    <a href="/Anasayfa" class="btn btn-primary btn-lg mt-3">
+                        <i class="fas fa-arrow-right me-2"></i>Ürünleri Keşfet
+                    </a>
+                </div>
+            </div>
+            <style>
+                .cart-content {
+                    display: inline;
+                }
+            </style>
+        }
+        else
+        {
+            <div class="cart-content">
+                <div class="cart-items">
+                    <div class="cart-actions">
+                        <div class="select-all">
+                            @if (Model.TotalStatus)
+                            {
+                                <input type="checkbox" id="selectAll" checked>
+                            }
+                            else
+                            {
+                                <input type="checkbox" id="selectAll">
+                            }
+                            <label for="selectAll">Tümünü Seç</label>
+                        </div>
+                        <button class="delete-selected">
+                            <i class="fas fa-trash"></i> <span class="desktop-text">Seçilenleri Sil</span>
+                        </button>
+                    </div>
+                    @foreach (var item in Model.Items)
+                    {
+                        <!-- Ürün 1 -->
+                        <div class="cart-item">
+                            <div class="item-select">
+                                <div class="item-select">
+                                    @if (item.Status)
+                                    {
+                                        <input type="checkbox" class="item-checkbox" checked data-product-id="@item.ShoppingCartItemID">
+                                    }
+                                    else
+                                    {
+                                        <input type="checkbox" class="item-checkbox" data-product-id="@item.ShoppingCartItemID">
+                                    }
+                                </div>
+                            </div>
+                            <div class="item-image">
+                                <img src="@item.ProductImageUrl" alt="@item.ProductName" loading="lazy">
+                            </div>
+                            <div class="item-details">
+                                <h3 class="item-title">@item.ProductName</h3>
+                                <p class="item-variant">@item.ProductDescription</p>
+                                @if (item.ProductStock > 0)
+                                {
+                                    <div class="item-stock">
+                                        <i class="fas fa-check-circle"></i> Stokta var (@item.ProductStock)
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div style="color:red" class="item-stock">
+                                        <i class="fa-solid fa-circle-xmark"></i> Stokta Yok (@item.ProductStock)
+                                    </div>
+                                }
+
+                                <div class="item-actions">
+                                    @if (item.Favorites == true)
+                                    {
+                                        <button class="save-for-later" data-favoritesCardItemID="@item.FavoritesCardItemID" data-favoritesCardID="@item.FavoritesCardID" data-productID="@item.ProductId" data-favorites="shopping">
+                                            <i class="fas fa-bookmark"></i> <span class="desktop-text shopping">
+                                                Favorilerden Çıkar
+                                            </span>
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <button class="save-for-later" data-favoritesCardItemID="@item.FavoritesCardItemID" data-favoritesCardID="@item.FavoritesCardID" data-productID="@item.ProductId" data-favorites="shopping">
+                                            <i class="far fa-bookmark"></i> <span class="desktop-text shopping">
+                                                Favorilere Ekle
+                                            </span>
+                                        </button>
+                                    }
+                                    <button class="remove-item" data-product-id="@item.ShoppingCartItemID">
+                                        <i class="fas fa-trash"></i> <span class="desktop-text">Sil</span>
+                                    </button>
+                                    <form id="deleteForm" asp-action="RemoveItems" asp-controller="Shopping" method="post">
+                                        <input type="hidden" id="selectedIdsInput" name="ids" value="" />
+                                        @Html.AntiForgeryToken()
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="item-price">
+                                <div class="price-container">
+                                    @if (item.ProductSaleSeason)
+                                    {
+                                        <span class="current-price">₺@item.ProductSalePrice.ToString("N2", new CultureInfo("tr-TR"))</span>
+                                        <span class="original-price">₺@item.ProductPrice.ToString("N2", new CultureInfo("tr-TR"))</span>
+                                        <span class="discount-badge">%@Math.Round(item.ProductDiscountRate)</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="current-price">₺@item.ProductPrice.ToString("N2", new CultureInfo("tr-TR"))</span>
+                                    }
+
+                                </div>
+                                <div class="quantity-control">
+                                    <button class="quantity-btn minus"><i class="fas fa-minus"></i></button>
+                                    <input type="number" value="@item.Quantity" min="1" max="@item.ProductStock" class="quantity-input">
+                                    <button class="quantity-btn plus"><i class="fas fa-plus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <div class="cart-summary">
+                    <div class="summary-header">
+                        <h3><i class="fas fa-receipt"></i> Sipariş Özeti</h3>
+                    </div>
+                    <div class="summary-content">
+                        <div class="summary-row">
+                            <span>Ürün Toplamı (@Model.TrueStatusCount ürün)</span>
+                            <span>₺@Model.TotalPrice.ToString("N2", new CultureInfo("tr-TR"))</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Kargo Ücreti</span>
+                            <span class="free-shipping">Ücretsiz</span>
+                        </div>
+                        @if (Model.TotalDiscountAmount != 0)
+                        {
+                            <div class="summary-row">
+                                <span>İndirimler</span>
+                                <span class="discount">-₺@Model.TotalDiscountAmount.ToString("N2", new CultureInfo("tr-TR"))</span>
+                            </div>
+                        }
+                        <div class="coupon-section">
+                            <div class="coupon-input">
+                                <input type="text" placeholder="Kupon Kodu Girin">
+                                <button class="apply-coupon">Uygula</button>
+                            </div>
+                            <p class="coupon-info">Kupon kodunuz mu var?</p>
+                        </div>
+                        <div class="summary-total">
+
+                            <span>Toplam Tutar</span>
+                            <span class="total-price">₺@Model.TotalSalePrice.ToString("N2", new CultureInfo("tr-TR"))</span>
+                        </div>
+                        <button class="checkout-btn" id="secureCheckoutBtn">Güvenli Ödemeye Geç</button>
+                        <div class="payment-methods">
+                            <img src="~/logo/visa.png" alt="Visa" width="40" height="25" loading="lazy">
+                            <img src="~/logo/mastercard.png" alt="Mastercard" width="40" height="25" loading="lazy">
+                            <img src="~/logo/amex.png" alt="American Express" width="40" height="25" loading="lazy">
+                            <img src="~/logo/paypal.png" alt="PayPal" width="40" height="25" loading="lazy">
+                            <img src="~/logo/apay.png" alt="Apple Pay" width="40" height="25" loading="lazy">
+                        </div>
+                    </div>
+                    <div class="secure-info">
+                        <i class="fas fa-lock"></i>
+                        <span>256-bit SSL şifreleme ile güvenli alışveriş</span>
+                    </div>
+                </div>
+            </div>
+        }
+
+        @await Component.InvokeAsync("_CardRecommendationComponentPartial")
+
+    </div>
+</main>
+
+<!-- JavaScript -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Element Seçiciler
+        const selectAllCheckbox = document.getElementById('selectAll');
+        const itemCheckboxes = document.querySelectorAll('.item-checkbox');
+        const deleteForm = document.getElementById('deleteForm');
+        const selectedIdsInput = document.getElementById('selectedIdsInput');
+
+        // 1. Tümünü Seç/Seçimi Kaldır
+        selectAllCheckbox.addEventListener('change', function () {
+            const isChecked = this.checked;
+            itemCheckboxes.forEach(checkbox => {
+                checkbox.checked = isChecked;
+                triggerStatusUpdate(checkbox);
+            });
+            updateCartTotals();
+        });
+
+        // 2. Tekli Checkbox Değişiklikleri
+        itemCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function () {
+                updateSelectAllCheckbox();
+                updateCartTotals();
+                triggerStatusUpdate(this);
+            });
+        });
+
+        // 3. Tümünü Seç Durumunu Güncelle
+        function updateSelectAllCheckbox() {
+            const allChecked = [...itemCheckboxes].every(c => c.checked);
+            const anyChecked = [...itemCheckboxes].some(c => c.checked);
+            selectAllCheckbox.checked = allChecked;
+            selectAllCheckbox.indeterminate = anyChecked && !allChecked;
+        }
+
+        // 4. Ürün Durum Güncelleme (API)
+        async function triggerStatusUpdate(checkbox) {
+            const itemId = checkbox.dataset.productId;
+            const newStatus = checkbox.checked;
+
+            try {
+                const response = await fetch('/Anasayfa/Sepetim/UpdateCartItemStatus', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                    },
+                    body: JSON.stringify({
+                        shoppingCartItemId: parseInt(itemId),
+                        status: newStatus
+                    })
+                });
+
+                if (!response.ok) {
+                    checkbox.checked = !newStatus;
+                    throw new Error(await response.text());
+                }
+            } catch (error) {
+                console.error("Hata:", error);
+                Swal.fire('Hata!', 'Durum güncellenemedi: ' + error.message, 'error');
+                updateCartTotals();
+            }
+        }
+
+        // 5. Tekli Silme İşlemi
+        document.querySelectorAll('.remove-item').forEach(button => {
+            button.addEventListener('click', function (e) {
+                e.preventDefault();
+                const productId = this.dataset.productId;
+
+                Swal.fire({
+                    title: 'Ürünü silmek istiyor musunuz?',
+                    text: "Bu işlem geri alınamaz!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Evet, sil!',
+                    cancelButtonText: 'İptal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        selectedIdsInput.value = JSON.stringify([productId]);
+                        deleteForm.submit();
+                    }
+                });
+            });
+        });
+
+        // 6. Çoklu Silme İşlemi
+        document.querySelector('.delete-selected').addEventListener('click', function (e) {
+            e.preventDefault();
+            const selectedItems = Array.from(document.querySelectorAll('.item-checkbox:checked'))
+                .map(checkbox => parseInt(checkbox.dataset.productId));
+
+            if (!selectedItems.length) {
+                Swal.fire('Uyarı!', 'Lütfen silmek istediğiniz ürünleri seçin.', 'warning');
+                return;
+            }
+
+            Swal.fire({
+                title: `${selectedItems.length} ürünü silmek istiyor musunuz?`,
+                text: "Bu işlem geri alınamaz!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Evet, sil!',
+                cancelButtonText: 'İptal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    selectedIdsInput.value = JSON.stringify(selectedItems);
+                    deleteForm.submit();
+                }
+            });
+        });
+
+        // 7. Miktar Güncelleme
+        document.querySelectorAll('.quantity-control').forEach(control => {
+            const input = control.querySelector('.quantity-input');
+            const minusBtn = control.querySelector('.minus');
+            const plusBtn = control.querySelector('.plus');
+            const maxStock = parseInt(input.getAttribute('max'));
+            const itemId = control.closest('.cart-item').querySelector('.item-checkbox').dataset.productId;
+
+            const updateQuantity = async (newQuantity) => {
+                const currentQuantity = parseInt(input.value) || 1;
+
+                // Validasyon
+                if (newQuantity < 1) {
+                    newQuantity = 1;
+                    Swal.fire('Uyarı!', 'Minimum 1 adet seçebilirsiniz', 'warning');
+                } else if (newQuantity > maxStock) {
+                    newQuantity = maxStock;
+                    Swal.fire('Stok Limiti!', `Maksimum ${maxStock} adet seçebilirsiniz`, 'info');
+                }
+
+                input.value = newQuantity;
+
+                try {
+                    const response = await fetch('/Anasayfa/Sepetim/UpdateQuantity', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                        },
+                        body: JSON.stringify({
+                            ShoppingCardItemId: parseInt(itemId),
+                            Quantity: newQuantity
+                        })
+                    });
+
+                    if (!response.ok) {
+                        input.value = currentQuantity;
+                        throw new Error(await response.text());
+                    }
+                    updateCartTotals();
+                } catch (error) {
+                    Swal.fire('Hata!', error.message || 'Sunucuya ulaşılamadı', 'error');
+                }
+            };
+
+            plusBtn.addEventListener('click', () => updateQuantity(parseInt(input.value) + 1));
+            minusBtn.addEventListener('click', () => updateQuantity(parseInt(input.value) - 1));
+            input.addEventListener('change', () => updateQuantity(parseInt(input.value) || 1));
+        });
+
+        // 8. Favori Butonları
+        document.querySelectorAll('.save-for-later').forEach(button => {
+            button.addEventListener('click', async function () {
+                const favoritesCardItemID = this.dataset.favoritescarditemid;
+                const favoritesCardID = this.dataset.favoritescardid;
+                const productID = this.dataset.productid;
+                const context = this.dataset.favorites;
+                const icon = this.querySelector('i');
+                const textSpan = this.querySelector('.desktop-text');
+
+                try {
+                    const response = await fetch('/Anasayfa/Favorilerim/ToggleFavorite', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                        },
+                        body: JSON.stringify({
+                            favoritesCardItemID: favoritesCardItemID,
+                            favoritesCardID: favoritesCardID,
+                            productID: productID,
+                            context: context
+                        })
+                    });
+
+                    if (response.ok) {
+                        const result = await response.json();
+                        if (result.isFavorite) {
+                            icon.classList.remove('far');
+                            icon.classList.add('fas');
+                            textSpan.textContent = 'Favorilerden Çıkar';
+                            Swal.fire('Başarılı!', 'Ürün favorilere eklendi', 'success');
+                        } else {
+                            icon.classList.remove('fas');
+                            icon.classList.add('far');
+                            textSpan.textContent = 'Favorilere Ekle';
+                            Swal.fire('Başarılı!', 'Ürün favorilerden çıkarıldı', 'success');
+                        }
+                    } else {
+                        throw new Error(await response.text());
+                    }
+                } catch (error) {
+                    Swal.fire('Hata!', error.message || 'İşlem sırasında bir hata oluştu', 'error');
+                }
+            });
+        });
+
+        // Yardımcı Fonksiyonlar
+        function formatPrice(price) {
+            return '₺' + parseFloat(price).toLocaleString('tr-TR', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+        }
+
+        function manageDiscountRow(totalDiscount) {
+            let discountRow = document.querySelector('.summary-row:nth-child(3)');
+
+            if (!discountRow && totalDiscount > 0) {
+                discountRow = document.createElement('div');
+                discountRow.className = 'summary-row';
+                discountRow.innerHTML = `
+                    <span>İndirimler</span>
+                    <span class="discount">-${formatPrice(totalDiscount)}</span>
+                `;
+                document.querySelector('.summary-row:nth-child(2)').after(discountRow);
+            }
+
+            if (discountRow) {
+                discountRow.style.display = totalDiscount > 0 ? 'flex' : 'none';
+                if (totalDiscount > 0) {
+                    discountRow.querySelector('.discount').textContent = `-${formatPrice(totalDiscount)}`;
+                }
+            }
+        }
+
+        // Sepet Toplamlarını Hesapla
+        function updateCartTotals() {
+            let productTotal = 0, totalPrice = 0, totalDiscount = 0, itemCount = 0;
+
+            document.querySelectorAll('.cart-item').forEach(item => {
+                const checkbox = item.querySelector('.item-checkbox');
+                if (checkbox.checked) {
+                    const quantity = parseInt(item.querySelector('.quantity-input').value) || 0;
+                    const currentPrice = parsePrice(item.querySelector('.current-price'));
+                    const originalPrice = item.querySelector('.original-price')
+                        ? parsePrice(item.querySelector('.original-price'))
+                        : currentPrice;
+
+                    productTotal += originalPrice * quantity;
+                    totalPrice += currentPrice * quantity;
+                    totalDiscount += (originalPrice - currentPrice) * quantity;
+                    itemCount += quantity;
+                }
+            });
+
+            // UI Güncellemeleri
+            const summaryRow = document.querySelector('.summary-row:nth-child(1)');
+            const cartCountElement = document.querySelector('.cart-title p');
+            if (summaryRow) {
+                summaryRow.querySelector('span:last-child').textContent = formatPrice(productTotal);
+                summaryRow.querySelector('span:first-child').textContent = `Ürün Toplamı (${itemCount} ürün)`;
+                cartCountElement.textContent = `${itemCount} ürün`;
+            }
+
+            const totalElement = document.querySelector('.summary-total .total-price');
+            if (totalElement) totalElement.textContent = formatPrice(totalPrice);
+
+            // Güvenli Ödeme butonunu güncelle
+            const checkoutBtn = document.getElementById('secureCheckoutBtn');
+            if (totalPrice <= 0) {
+                checkoutBtn.disabled = true;
+                checkoutBtn.classList.add('disabled');
+                checkoutBtn.style.cursor = 'not-allowed';
+                checkoutBtn.style.opacity = '0.6';
+            } else {
+                checkoutBtn.disabled = false;
+                checkoutBtn.classList.remove('disabled');
+                checkoutBtn.style.cursor = 'pointer';
+                checkoutBtn.style.opacity = '1';
+            }
+
+            manageDiscountRow(totalDiscount);
+        }
+
+        function parsePrice(element) {
+            return parseFloat(
+                element.textContent
+                    .replace('₺', '')
+                    .replace(/\./g, '')
+                    .replace(',', '.')
+            ) || 0;
+        }
+
+        // Sayfa Yüklendiğinde Toplamları Hesapla ve buton durumunu kontrol et
+        updateCartTotals();
+
+        // Ödeme butonu click eventi
+        document.getElementById('secureCheckoutBtn').addEventListener('click', function (e) {
+            e.preventDefault();
+            const totalPrice = parsePrice(document.querySelector('.summary-total .total-price'));
+
+            if (totalPrice <= 0) {
+                return;
+            }
+
+            // Stok kontrolü yap
+            const outOfStockItems = [];
+            document.querySelectorAll('.cart-item').forEach(item => {
+                const checkbox = item.querySelector('.item-checkbox');
+                if (checkbox.checked) {
+                    const stockText = item.querySelector('.item-stock').textContent;
+                    const stockMatch = stockText.match(/Stokta var \((\d+)\)/) || stockText.match(/Stokta Yok \((\d+)\)/);
+                    const stock = stockMatch ? parseInt(stockMatch[1]) : 0;
+                    const productName = item.querySelector('.item-title').textContent;
+
+                    if (stock <= 0) {
+                        outOfStockItems.push(productName);
+                    }
+                }
+            });
+
+            if (outOfStockItems.length > 0) {
+                // Stokta olmayan ürünler varsa uyarı göster
+                const productList = outOfStockItems.map(item => `• ${item}`).join('<br>');
+                Swal.fire({
+                    title: 'Stok Problemi!',
+                    html: `Aşağıdaki ürünler stokta bulunmamaktadır:<br><br>${productList}<br><br>Lütfen bu ürünleri seçmeyin veya sepetinizden çıkarın.`,
+                    icon: 'error',
+                    confirmButtonText: 'Tamam'
+                });
+            } else {
+                // Tüm ürünler stokta ise ödeme sayfasına yönlendir
+                window.location.href = '/Anasayfa/Sepetim/Odeme';
+            }
+        });
+    }); 
+</script>

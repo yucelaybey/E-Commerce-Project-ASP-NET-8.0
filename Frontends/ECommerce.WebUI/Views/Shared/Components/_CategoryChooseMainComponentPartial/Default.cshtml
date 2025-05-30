@@ -1,0 +1,56 @@
+﻿@model List<GetCategoryDto>
+
+    <div class="all-categories-link">
+        <a href="/Anasayfa/Kategoriler/" class="all-categories-btn">
+            <i class="fas fa-list"></i> Tüm Kategorileri Görüntüle
+        </a>
+    </div>
+    <div class="shop-section">
+        @if (Model != null && Model.Count != 0)
+        {
+            @foreach (var item in Model.Take(8))
+            {
+                <div class="box">
+                <a style="text-decoration:none" href="/Anasayfa/Kategoriler/@FormatForUrl(item.Name)">
+                        <h2>@item.Name</h2>
+                        <div class="box-img" style="background-image: url('@item.ImageUrl');"></div>
+                            <p>Daha Fazla Gör</p>
+                        </a>
+                </div>
+            }
+        }
+        else
+        {
+            <div style="display: flex; justify-content: center; align-items: center; height: 5vh;">
+                <b style="color: red;">Kategori bulunmamaktadır</b>
+            </div>
+        }
+    </div>
+
+@functions {
+    public string FormatForUrl(string text)
+    {
+        if (string.IsNullOrEmpty(text))
+            return string.Empty;
+
+        // Türkçe büyük harfleri önce küçült
+        text = text.ToLower(System.Globalization.CultureInfo.GetCultureInfo("tr-TR"));
+
+        // Tüm Türkçe karakterleri İngilizce karşılıklarıyla değiştir
+        var turkishChars = "ığüşöç";
+        var englishChars = "igusoc";
+
+        for (int i = 0; i < turkishChars.Length; i++)
+        {
+            text = text.Replace(turkishChars[i], englishChars[i]);
+        }
+
+        // Özel karakterleri temizle ve boşlukları tireye çevir
+        text = System.Text.RegularExpressions.Regex.Replace(text, @"[^a-z0-9\s-]", "");
+        text = text.Replace(" ", "-");
+
+        // Ardışık tireleri temizle
+        text = System.Text.RegularExpressions.Regex.Replace(text, @"-+", "-");
+        return text.Trim('-');
+    }
+}

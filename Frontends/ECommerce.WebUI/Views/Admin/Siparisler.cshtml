@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewData["Title"] = "Siparisler";
+    Layout = "~/Views/UILayout/UILayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+
+@await Component.InvokeAsync("_HeadAdminOrderComponentPartial")
+
+<body>
+    <!-- Ana İçerik -->
+    @await Component.InvokeAsync("_MainAdminOrderComponentPartial")
+
+    @await Component.InvokeAsync("_OrderScriptComponentPartial")
+</body>
+
+</html>
+
+

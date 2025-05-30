@@ -1,0 +1,31 @@
+﻿<div class="filter-sort-container" style="justify-content: center;">
+    <div class="filter-section-wrapper">
+        <div class="filter-controls-row">
+            <div style="position: relative;">
+                <button class="filter-btn" id="filterBtn">
+                    <i class="fas fa-filter"></i> Filtrele
+                </button>
+                <div class="filter-active-indicator" id="filterIndicator">1</div>
+            </div>
+            <select class="sort-select" id="sortSelect">
+                <option value="popular">Önce Popüler</option>
+                <option value="price-high-to-low">Fiyatı Azalan</option>
+                <option value="price-low-to-high">Fiyatı Artan</option>
+            </select>
+        </div>
+
+        <div class="filter-panel" id="filterPanel">
+            <div class="filter-title">
+                ₺ Fiyat Aralığı
+            </div>
+            <div class="price-range-container">
+                <input type="number" class="price-input" id="minPrice" placeholder="Min Fiyat" min="0">
+                <span class="price-separator">-</span>
+                <input type="number" class="price-input" id="maxPrice" placeholder="Max Fiyat" min="0">
+            </div>
+            <button class="clear-filter-btn" id="clearFilter">
+                <i class="fas fa-times"></i> Temizle
+            </button>
+        </div>
+    </div>
+</div>

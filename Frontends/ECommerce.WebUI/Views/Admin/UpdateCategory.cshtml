@@ -1,0 +1,70 @@
+﻿@model UpdateCategoryDto
+@{
+    ViewData["Title"] = "Kategori Güncelle";
+    Layout = "~/Views/UILayout/UILayout.cshtml";
+}
+
+@await Component.InvokeAsync("_HeadAdminUpdateCategoryComponentPartial")
+
+<div class="admin-main-content">
+    <!-- Geri Dön Butonu -->
+    <a href="~/Admin/Category" style="text-decoration: none;">
+        <button class="back-btn">
+            <i class="fas fa-arrow-left"></i> Geri Dön
+        </button>
+    </a>
+
+    <!-- Kategori Güncelle Formu -->
+    <div class="form-container">
+        <h2>Kategori Güncelle</h2>
+        <form id="updateCategoryForm" method="post" enctype="multipart/form-data" asp-action="UpdateCategory" asp-controller="Admin">
+            @Html.HiddenFor(x => x.Id)
+            @Html.HiddenFor(x => x.ImageUrl) <!-- Eski resim URL'sini sakla -->
+            <!-- Resim Yükleme Kısmı -->
+            <div class="form-group">
+                <label asp-for="Image">Kategori Resmi</label>
+                <div class="image-upload-container" id="imageUploadContainer">
+                    <div class="image-preview" id="imagePreview">
+                        @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                        {
+                            <img src="@Model.ImageUrl" alt="Eski Resim">
+                            <div class="upload-overlay">
+                                <span>Yeni Resim Ekle</span>
+                            </div>
+                        }
+                        else
+                        {
+                            <i class="fas fa-image image-icon"></i>
+                            <div class="upload-overlay">
+                                <span>Yeni Resim Ekle</span>
+                            </div>
+                        }
+                    </div>
+                    <input type="file" asp-for="Image" id="categoryImage" name="Image" accept="image/*" class="file-input">
+                </div>
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+
+            <!-- Kategori Adı -->
+            <div class="form-group">
+                <label asp-for="Name">Kategori Adı</label>
+                <input type="text" asp-for="Name" id="categoryName" name="Name" placeholder="Kategori adı girin" value="@Model.Name" required>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <!-- Kategori Açıklaması -->
+            <div class="form-group">
+                <label asp-for="Description">Kategori Açıklaması</label>
+                <textarea asp-for="Description" id="categoryDescription" name="Description" placeholder="Kategori açıklaması girin" rows="6" required>@Model.Description</textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <!-- Gönder Butonu -->
+            <button type="submit" class="submit-btn">Kategori Güncelle</button>
+        </form>
+    </div>
+</div>
+
+<!-- JavaScript Dosyaları -->
+<script src="~/js/script.js"></script>
+<script src="~/js/update-category.js"></script>

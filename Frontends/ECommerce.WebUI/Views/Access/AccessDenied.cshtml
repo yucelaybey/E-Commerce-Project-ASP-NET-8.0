@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewData["Title"] = "AccessDenied";
+    Layout = "~/Views/UILayout/UIAccessLayout.cshtml";
+}
+
+<!-- Access Denied Content -->
+<main class="access-denied-container">
+    <div class="container">
+        <div class="access-denied-content">
+            <div class="access-denied-icon">
+                <i class="fas fa-ban"></i>
+            </div>
+            <h1>Erişim Reddedildi</h1>
+            <p class="message">Bu sayfaya erişim izniniz bulunmamaktadır.</p>
+            <div class="error-code">Hata Kodu: 403</div>
+            <div class="possible-reasons">
+                <h3>Olası Nedenler:</h3>
+                <ul>
+                    <li>Oturum süreniz dolmuş olabilir</li>
+                    <li>Bu sayfayı görüntülemek için gerekli izinlere sahip değilsiniz</li>
+                    <li>Hesabınızın yetkilendirmesi eksik olabilir</li>
+                    <li>Girmeye çalıştığınız sayfa kısıtlanmış olabilir</li>
+                </ul>
+            </div>
+            <div class="action-buttons">
+                <a href="/Anasayfa" class="back-home-btn">
+                    <i class="fas fa-home"></i> Anasayfaya Dön
+                </a>
+                <a href="/Login/GirisYap" class="login-btn">
+                    <i class="fas fa-sign-in-alt"></i> Giriş Yap
+                </a>
+                <a href="/Anasayfa/Yardim" class="help-btn">
+                    <i class="fas fa-question-circle"></i> Yardım Al
+                </a>
+            </div>
+        </div>
+    </div>
+</main>
+

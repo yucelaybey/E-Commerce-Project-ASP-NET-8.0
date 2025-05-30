@@ -1,0 +1,170 @@
+﻿@using System.Globalization
+@model List<OrderWithItemsDto>
+@{
+    ViewData["Title"] = "Siparislerim";
+    Layout = "~/Views/UILayout/UIOrderLayout.cshtml";
+}
+
+@if (Model.Count == 0)
+{
+    @await Component.InvokeAsync("_NotOrderComponentPartial")
+}
+else
+{
+    <!-- Main Content -->
+    <main class="orders-main">
+        <div class="container">
+            <h1 class="page-title"><i class="fas fa-box-open"></i> Siparişlerim</h1>
+
+            <!-- Orders Filter -->
+            <div class="orders-filter">
+                <div class="filter-group">
+                    <label for="orderStatus">Durum:</label>
+                    <select id="orderStatus">
+                        <option value="all">Tüm Siparişler</option>
+                        <option value="pending">Onay Bekleniyor</option>
+                        <option value="preparing">Hazırlanıyor</option>
+                        <option value="shipped">Kargoda</option>
+                        <option value="delivered">Teslim Edildi</option>
+                        <option value="cancelled">İptal Edildi</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="orderDate">Tarih:</label>
+                    <select id="orderDate">
+                        <option value="all">Tüm Zamanlar</option>
+                        <option value="month">Son 1 Ay</option>
+                        <option value="3months">Son 3 Ay</option>
+                        <option value="year">Son 1 Yıl</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Orders List -->
+            <div class="orders-list">
+
+                @foreach (var item in Model)
+                {
+
+                    <!-- Order 1 -->
+                    <div class="order-card">
+                        <div class="order-header">
+                            <div class="order-info">
+                                <span class="order-id">Sipariş No: @item.Order.OrderNumber</span>
+                                <span class="order-date"><i class="far fa-calendar-alt"></i> @item.Order.OrderDate.ToShortDateString()</span>
+                                <div class="private-discount-amount" hidden>₺@string.Format(CultureInfo.GetCultureInfo("tr-TR"), "{0:N2}", item.Order.DiscountAmount)</div>
+                                <div class="private-total-price" hidden>₺@string.Format(CultureInfo.GetCultureInfo("tr-TR"), "{0:N2}", item.Order.TotalPrice)</div>
+                            </div>
+                            @if (item.Order.OrderStatus == "Onay Bekleniyor")
+                            {
+                                <div class="order-status status-pending">
+                                    <i class="fas fa-clock"></i> Onay Bekleniyor
+                                </div>
+                            }
+                            else if (item.Order.OrderStatus == "Hazırlanıyor")
+                            {
+                                <div class="order-status status-preparing">
+                                    <i class="fas fa-clock"></i> Hazırlanıyor
+                                </div>
+                            }
+                            else if (item.Order.OrderStatus == "Kargoda")
+                            {
+                                <div class="order-status status-shipped">
+                                    <i class="fas fa-clock"></i> Kargoda
+                                </div>
+                            }
+                            else if (item.Order.OrderStatus == "Teslim Edildi")
+                            {
+                                <div class="order-status status-delivered">
+                                    <i class="fas fa-clock"></i> Teslim Edildi
+                                </div>
+                            }
+                            else if (item.Order.OrderStatus == "İptal Edildi")
+                            {
+                                <div class="order-status status-cancelled">
+                                    <i class="fas fa-clock"></i> İptal Edildi
+                                </div>
+                            }
+                        </div>
+
+                        <div class="order-products">
+                            @foreach (var items in item.OrderItems)
+                            {
+                                @if (item.Order.OrderID == items.OrderID)
+                                {
+                                    <div class="order-product">
+                                        <div class="product-image">
+                                            <img src="@items.ImageUrl" alt="Ürün Resmi">
+                                        </div>
+                                        <div class="product-details">
+                                            <h3 class="product-name">@items.Name</h3>
+                                            <div class="product-sku">@items.Description</div>
+                                            <div class="product-quantity">Adet: @items.Quantity</div>
+                                            @if (items.SaleSeason)
+                                            {
+                                                <div class="product-price">₺@string.Format(CultureInfo.GetCultureInfo("tr-TR"), "{0:N2}", items.SalePrice * items.Quantity)</div>
+                                            }
+                                            else
+                                            {
+                                                <div class="product-price">₺@string.Format(CultureInfo.GetCultureInfo("tr-TR"), "{0:N2}", items.Price * items.Quantity)</div>
+                                            }
+
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+
+                        <div class="order-footer">
+                            <div class="order-total">
+                                <span>Toplam:</span>
+                                <div class="total-amount">₺@string.Format(CultureInfo.GetCultureInfo("tr-TR"), "{0:N2}", item.Order.TotalAmount)</div>
+                            </div>
+                            <div class="order-actions">
+                                <button class="order-detail-btn">Sipariş Detayı</button>
+                                @if (item.Order.OrderStatus == "Onay Bekleniyor")
+                                {
+                                    <button class="order-cancel-btn">Siparişi İptal Et</button>
+                                }
+                                else if (item.Order.OrderStatus == "Hazırlanıyor")
+                                {
+                                    <button class="order-cancel-btn">Siparişi İptal Et</button>
+                                }
+                                else if (item.Order.OrderStatus == "Kargoda")
+                                {
+                                    <button class="order-track-btn">Kargoyu Takip Et</button>
+                                }
+                                else if (item.Order.OrderStatus == "Teslim Edildi")
+                                {
+                                    <button class="order-return-btn">İade Talebi Oluştur</button>
+                                    <button class="order-rate-btn">Değerlendir</button>
+                                }
+                                else if (item.Order.OrderStatus == "İptal Edildi")
+                                {
+                                    <button class="order-reorder-btn">Tekrar Sipariş Ver</button>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+
+            <!-- Pagination -->
+            <div class="pagination-container">
+                <div class="pagination"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Order Detail Modal -->
+    <div class="modal" id="orderDetailModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2><i class="fas fa-file-invoice"></i> Sipariş Detayı</h2>
+            <div class="order-detail-content">
+                <!-- Content will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+}

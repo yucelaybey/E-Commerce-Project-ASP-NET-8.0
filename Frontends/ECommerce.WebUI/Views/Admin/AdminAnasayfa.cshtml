@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewData["Title"] = "UILayout";
+    Layout = "~/Views/UILayout/UILayout.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/admin-orderdetailsmodal.css">
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+
+<!-- Main Content -->
+    <main class="main-content">
+        <div class="page-header">
+            <h2>Yönetici Paneli</h2>
+            <div class="breadcrumb">
+            <a style="text-decoration: none;" href="~/Anasayfa">
+                <span style="color:#ff9900;">Anasayfa</span>
+            </a>
+                <i class="fas fa-chevron-right"></i>
+            <a style="text-decoration: none;" href="/YoneticiPaneli/Anasayfa"><span style="color:#ff9900; text-decoration:none;">Yönetici Paneli</span></a>
+            </div>
+        </div>
+
+    @await Component.InvokeAsync("_StatsCardsComponentPartial")
+
+        @await Component.InvokeAsync("_RecentOrderComponentPartial")
+    </main>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script src="~/js/admin-dashboard.js"></script>
+<script src="~/js/admin-orders.js"></script>

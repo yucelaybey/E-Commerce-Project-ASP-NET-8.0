@@ -1,0 +1,12 @@
+﻿@{
+    ViewData["Title"] = ViewBag.CategoryName;
+    int categoryId = ViewBag.CategoryId;
+    Layout = "~/Views/UILayout/UICategoryProductListLayout.cshtml";
+}
+
+@await Component.InvokeAsync("_CategoryBannerAndBreadCrumbCategoryProductListComponentPartial", new { categoryId = ViewBag.CategoryId })
+@await Component.InvokeAsync("_FilterCategoryProductListComponentPartial")
+
+@await Component.InvokeAsync("_ProductListCategoryProductListComponentPartial", new { categoryId = ViewBag.CategoryId })
+@await Component.InvokeAsync("_WarningModalComponentPartial")
+

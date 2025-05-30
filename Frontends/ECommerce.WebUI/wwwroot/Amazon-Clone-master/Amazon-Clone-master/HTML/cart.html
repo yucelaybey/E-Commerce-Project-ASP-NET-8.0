@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sepetim - E-Ticaret</title>
+    <link rel="stylesheet" href="card.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="amazon_logo.png" alt="E-Ticaret Logo">
+        </div>
+        <h1>Sepetim</h1>
+    </header>
+
+    <main class="cart-container">
+        <section class="cart-items">
+            <div class="select-all">
+                <input type="checkbox" id="select-all-checkbox">
+                <label for="select-all-checkbox">Tümünü Seç</label>
+            </div>
+            <div class="cart-item">
+                <input type="checkbox" class="item-checkbox">
+                <div class="item-image">
+                    <img src="product1.jpg" alt="Ürün 1">
+                </div>
+                <div class="item-details">
+                    <h2 class="item-title">Ürün 1</h2>
+                    <p class="item-description">Bu ürün çok kaliteli ve dayanıklıdır. Her türlü kullanım için uygundur.</p>
+                </div>
+                <div class="quantity-controls">
+                    <button class="quantity-btn decrease">-</button>
+                    <span class="quantity">1</span>
+                    <button class="quantity-btn increase">+</button>
+                </div>
+                <div class="item-price">
+                    ₺100.00
+                </div>
+                <button class="remove-item" aria-label="Ürünü sil">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+
+            <div class="cart-item">
+                <input type="checkbox" class="item-checkbox">
+                <div class="item-image">
+                    <img src="product2.jpg" alt="Ürün 2">
+                </div>
+                <div class="item-details">
+                    <h2 class="item-title">Ürün 2</h2>
+                    <p class="item-description">Bu ürün çok kaliteli ve dayanıklıdır. Her türlü kullanım için uygundur.</p>
+                </div>
+                <div class="quantity-controls">
+                    <button class="quantity-btn decrease">-</button>
+                    <span class="quantity">2</span>
+                    <button class="quantity-btn increase">+</button>
+                </div>
+                <div class="item-price">
+                    ₺150.00
+                </div>
+                <button class="remove-item" aria-label="Ürünü sil">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+        </section>
+
+        <aside class="order-summary">
+            <h2>Sipariş Özeti</h2>
+            <div class="summary-item">
+                <span>Ürün Toplamı</span>
+                <span class="total-price">₺250.00</span>
+            </div>
+            <div class="summary-item">
+                <span>Kargo Ücreti</span>
+                <span class="shipping-fee">₺44.90</span>
+            </div>
+            <div class="summary-item discount">
+                <span>250 TL ve Üzeri Kargo Bedava (Satıcı Karşılar)</span>
+                <span class="discount-amount">-₺44.90</span>
+            </div>
+            <div class="summary-item grand-total">
+                <span>Toplam</span>
+                <span class="grand-total-price">₺250.00</span>
+            </div>
+            <button class="checkout-btn">Sepeti Onayla</button>
+            <p class="free-shipping-info" id="free-shipping-info">
+                250 TL'ye <span class="remaining-amount">₺50.00</span> kadar ürün eklerseniz kargo ücretsiz olsun.
+            </p>
+        </aside>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Hakkımızda</h3>
+                <p>Şirketimiz 2000 yılından beri kaliteli ürünler sunmaktadır.</p>
+            </div>
+            <div class="footer-section">
+                <h3>İletişim</h3>
+                <p>Email: info@example.com</p>
+                <p>Telefon: +90 123 456 78 90</p>
+            </div>
+            <div class="footer-section">
+                <h3>Sosyal Medya</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Tüm Hakları Saklıdır.</p>
+        </div>
+    </footer>
+
+    <script src="cart.js"></script>
+</body>
+</html>

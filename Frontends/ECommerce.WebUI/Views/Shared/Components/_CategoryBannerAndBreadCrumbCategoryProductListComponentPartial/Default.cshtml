@@ -1,0 +1,35 @@
+﻿@model GetCategoryDto
+<!-- Banner Kısmı -->
+<div class="category-banner">
+    <div class="banner-content">
+        <h1>@Model.Name Kategorisi</h1>
+        <p>@Model.Description</p>
+    </div>
+</div>
+
+<!-- Breadcrumb -->
+<div class="breadcrumb">
+    <a href="/Anasayfa">Anasayfa</a> &gt; <a href="/Anasayfa/Kategoriler/">Kategoriler</a> &gt; <a href="/Anasayfa/Kategoriler/@FormatCategoryNameForUrl(Model.Name)"><span>@Model.Name</span></a>
+</div>
+
+@functions {
+    public string FormatCategoryNameForUrl(string categoryName)
+    {
+        return categoryName
+            .Replace(" ", "-") // Boşlukları tire ile değiştir
+            .Replace("&", "ve") // & işaretini "ve" ile değiştir
+            .Replace("ı", "i") // Türkçe karakterleri İngilizce karşılıklarıyla değiştir
+            .Replace("ğ", "g")
+            .Replace("ü", "u")
+            .Replace("ş", "s")
+            .Replace("ö", "o")
+            .Replace("ç", "c")
+            .ToLower(); // Küçük harfe çevir
+    }
+
+    public string FormatProductNameForUrl(string productName)
+    {
+        return FormatCategoryNameForUrl(productName); // Aynı formatlama işlemi
+    }
+}
+

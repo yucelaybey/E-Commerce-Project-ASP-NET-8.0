@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Paneli</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="admin-dashboard.css"> <!-- Yeni CSS dosyası -->
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <div class="admin-sidebar">
+        <div class="sidebar-header">
+            <h3>Admin Paneli</h3>
+        </div>
+        <div class="sidebar-menu">
+            <a href="admin-dashboard.html" class="sidebar-item active">
+                <i class="fas fa-home"></i> Anasayfa
+            </a>
+            <a href="admin-categories.html" class="sidebar-item">
+                <i class="fas fa-list"></i> Kategori İşlemleri
+            </a>
+            <a href="admin-products.html" class="sidebar-item">
+                <i class="fas fa-box"></i> Ürün İşlemleri
+            </a>
+            <a href="admin-settings.html" class="sidebar-item">
+                <i class="fas fa-cog"></i> Hesap Ayarları
+            </a>
+        </div>
+
+        <!-- Kullanıcı Bilgisi -->
+        <div class="user-info">
+            <div class="user-name">
+                <i class="fas fa-user"></i> Ahmet Yılmaz
+            </div>
+            <div class="user-email">
+                <i class="fas fa-envelope"></i> ahmet.yilmaz@example.com
+            </div>
+            <div class="login-time">
+                <i class="fas fa-clock"></i> 25 Ekim 2023, 14:30
+            </div>
+        </div>
+    </div>
+
+    <!-- Ana İçerik -->
+    <div class="admin-main-content">
+        <!-- Geri Dön Butonu -->
+        <div class="back-to-home">
+            <a href="index.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Ana Sayfaya Dön
+            </a>
+        </div>
+
+        <!-- İstatistikler -->
+        <div class="admin-stats">
+            <div class="stat-card">
+                <h3>Son 30 Günün Geliri</h3>
+                <p>₺15,000</p>
+            </div>
+            <div class="stat-card">
+                <h3>Son 30 Günde Satılan Ürün Sayısı</h3>
+                <p>1,200</p>
+            </div>
+            <div class="stat-card">
+                <h3>Toplam Satılan Ürün Sayısı</h3>
+                <p>12,500</p>
+            </div>
+            <div class="stat-card">
+                <h3>En Çok Satılan Ürün</h3>
+                <p>Ürün 1 - 500 Adet</p>
+            </div>
+        </div>
+
+        <!-- En Çok Sepete Eklenen 5 Ürün -->
+        <div class="top-products">
+            <h2>En Çok Sepete Eklenen 5 Ürün</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Ürün Adı</th>
+                        <th>Sepete Eklenme Sayısı</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Ürün 1</td>
+                        <td>1,200</td>
+                    </tr>
+                    <tr>
+                        <td>Ürün 2</td>
+                        <td>1,100</td>
+                    </tr>
+                    <tr>
+                        <td>Ürün 3</td>
+                        <td>1,000</td>
+                    </tr>
+                    <tr>
+                        <td>Ürün 4</td>
+                        <td>950</td>
+                    </tr>
+                    <tr>
+                        <td>Ürün 5</td>
+                        <td>900</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="admin-footer">
+        <div class="footer-bottom">
+            <p>Tüm hakları saklıdır @ 2024</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="admin-dashboard.js"></script> <!-- Yeni JS dosyası -->
+</body>
+
+</html>

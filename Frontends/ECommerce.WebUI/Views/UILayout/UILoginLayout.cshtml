@@ -1,0 +1,13 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+
+@await Component.InvokeAsync("_HeadLoginComponentPartial")
+
+<body>
+    <div class="background-animation"></div>
+    <a href="/Anasayfa" class="back-to-home">
+        <i class="fas fa-arrow-left"></i> Ana Sayfaya Dön
+    </a>
+    @RenderBody()
+</body>
+</html>

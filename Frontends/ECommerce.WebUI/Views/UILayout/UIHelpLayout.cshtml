@@ -1,0 +1,18 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+
+@await Component.InvokeAsync("_HeadHelpComponentPartial")
+
+<body>
+    
+    @await Component.InvokeAsync("_TopBarShoppingComponentPartial")
+
+    @await Component.InvokeAsync("_HeaderHelpComponentPartial")
+
+    @RenderBody()
+
+    @await Component.InvokeAsync("_FooterMainComponentPartial")
+
+    <script src="~/js/help.js"></script>
+</body>
+</html>

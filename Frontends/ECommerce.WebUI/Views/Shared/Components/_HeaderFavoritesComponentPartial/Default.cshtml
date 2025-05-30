@@ -1,0 +1,24 @@
+﻿ @model List<FavoritesCardItemWithProductDto>
+ <!-- Favorites Header -->
+<header class="favorites-header">
+    <div class="container">
+        <div class="header-content">
+            <h1><i class="fas fa-heart"></i> Favorilerim</h1>
+            <p>Beğendiğiniz ürünleri burada saklayabilirsiniz</p>
+        </div>
+        <div class="sort-options">
+            <div class="sort-dropdown">
+                <span>Sırala:</span>
+                <select>
+                    <option value="normal">Varsayılan Sıralama</option>
+                    <option value="price-asc">Fiyat (artan)</option>
+                    <option value="price-desc">Fiyat (azalan)</option>
+                    <option value="name">Ürün adı (A-Z)</option>
+                </select>
+            </div>
+            <div class="item-count">
+                <span>@Model.Count ürün</span>
+            </div>
+        </div>
+    </div>
+</header>

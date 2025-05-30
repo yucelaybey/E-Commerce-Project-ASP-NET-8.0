@@ -1,0 +1,44 @@
+﻿@using System.Globalization
+@model GetAdminDashboadDto
+<!-- Stats Cards -->
+<div class="stats-grid">
+    <div class="stat-card">
+        <div class="stat-icon bg-accent">
+            <i class="fas fa-money-bill-wave"></i>
+        </div>
+        <div class="stat-info">
+            <h3>Toplam Gelir</h3>
+            <p>₺@string.Format(CultureInfo.GetCultureInfo("tr-TR"), "{0:N2}", Model.TotalAmount)</p>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon bg-success">
+            <i class="fas fa-shopping-cart"></i>
+        </div>
+        <div class="stat-info">
+            <h3>Toplam Sipariş</h3>
+            <p>@Model.TotalOrder</p>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon bg-warning">
+            <i class="fas fa-users"></i>
+        </div>
+        <div class="stat-info">
+            <h3>Kullanıcılar</h3>
+            <p>@Model.TotalUser</p>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon bg-danger">
+            <i class="fas fa-box-open"></i>
+        </div>
+        <div class="stat-info">
+            <h3>Ürünler</h3>
+            <p>@Model.TotalProduct</p>
+        </div>
+    </div>
+</div>

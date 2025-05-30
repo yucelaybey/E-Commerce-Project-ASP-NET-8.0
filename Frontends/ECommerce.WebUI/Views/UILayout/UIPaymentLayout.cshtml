@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+
+@await Component.InvokeAsync("_HeadPaymentComponentPartial")
+
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div class="spinner"></div>
+        <p>Ürün bilgileri alınıyor...</p>
+        <p>Sipariş için hazırlanıyor..</p>
+    </div>
+
+    @await Component.InvokeAsync("_TopBarShoppingComponentPartial")
+
+    @await Component.InvokeAsync("_HeaderPaymentComponentPartial")
+
+    <!-- Ödeme Ana İçerik -->
+    @RenderBody()
+
+    @await Component.InvokeAsync("_AddressPaymentComponentPartial")
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="~/js/payments.js"></script>
+    <script src="~/js/addressChoose.js"></script>
+    <script src="~/js/sepet.js"></script>
+</body>
+
+</html>

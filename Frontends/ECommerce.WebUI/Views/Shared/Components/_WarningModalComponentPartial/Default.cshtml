@@ -1,0 +1,75 @@
+﻿
+<!-- Auth Modal -->
+<div class="amz-auth-modal">
+    <div class="amz-auth-modal-content">
+        <span class="amz-close-modal">&times;</span>
+        <div class="amz-modal-header">
+            <i class="fas fa-shopping-cart amz-modal-icon"></i>
+            <h3 class="amz-modal-title">Sepete Erişim - Ürün Ekleme Favoriler</h3>
+        </div>
+        <div class="amz-modal-body">
+            <p class="amz-modal-text">Sepetinizi görüntülemek, ürün eklemek, favorilere eklemek yada görüntülemek için lütfen giriş yapın veya hesabınız yoksa kayıt olun.</p>
+        </div>
+        <div class="amz-modal-footer">
+            <a href="/Login/GirisYap" class="amz-modal-btn amz-login-btn">
+                <i class="fas fa-sign-in-alt"></i> Giriş Yap
+            </a>
+            <a href="/Login/KayitOl" class="amz-modal-btn amz-register-btn">
+                <i class="fas fa-user-plus"></i> Kayıt Ol
+            </a>
+        </div>
+    </div>
+</div>
+
+    <script>
+    // Modal işlevselliği
+    document.addEventListener('DOMContentLoaded', function() {
+        // Element seçiciler
+        const showModalTriggers = document.querySelectorAll('.show-modal-trigger');
+        const authModal = document.querySelector('.amz-auth-modal');
+        const closeAuthModal = document.querySelector('.amz-close-modal');
+
+        console.log(document.querySelectorAll('.show-modal-trigger')); 
+
+        // Modal açma fonksiyonu
+        function openModal() {
+            authModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Modal kapama fonksiyonu
+        function closeModal() {
+            authModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Tüm tetikleyicilere click eventi ekle
+        showModalTriggers.forEach(trigger => {
+            trigger.addEventListener('click', function(e) {
+                e.preventDefault();
+                openModal();
+            });
+        });
+
+        // Kapatma butonuna event ekle
+        if (closeAuthModal) {
+            closeAuthModal.addEventListener('click', closeModal);
+        }
+
+        // Modal dışına tıklandığında kapat
+        if (authModal) {
+            authModal.addEventListener('click', function(e) {
+                if (e.target === authModal) {
+                    closeModal();
+                }
+            });
+        }
+
+        // ESC tuşu ile kapatma
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && authModal.style.display === 'flex') {
+                closeModal();
+            }
+        });
+    });
+</script>

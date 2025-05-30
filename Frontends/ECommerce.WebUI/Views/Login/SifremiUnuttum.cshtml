@@ -1,0 +1,30 @@
+﻿@model CheckEmailResponseDto
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+
+@await Component.InvokeAsync("_HeadEmailComponentPartial")
+
+<body>
+    <div class="background-animation"></div>
+    <a href="/Anasayfa" class="back-to-home">
+        <i class="fas fa-arrow-left"></i> Ana Sayfaya Dön
+    </a>
+    <div class="auth-container">
+        <h2><i class="fas fa-envelope"></i> E-posta Adresinizi Girin</h2>
+        <form class="auth-form" method="post">
+            <div class="input-group">
+                <input type="text" placeholder="E-posta" id="emailInput" asp-for="Email" required>
+                <i class="fas fa-times-circle error-icon" id="emailIcon"></i>
+            </div>
+            <button type="submit" id="submitButton" disabled>Mail Gönder <i class="fas fa-arrow-right"></i></button>
+        </form>
+    </div>
+
+    <script src="~/js/email.js"></script>
+</body>
+
+</html>

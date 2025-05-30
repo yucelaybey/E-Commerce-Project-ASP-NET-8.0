@@ -1,0 +1,63 @@
+﻿<!-- Kredi Kartı Formu -->
+<div id="credit-card" class="tab-content">
+    <form class="card-form">
+        <div class="form-group">
+            <label>Kart Numarası</label>
+            <div class="input-with-icon">
+                <input type="text" placeholder="1234 5678 9012 3456" pattern="\d*"
+                       maxlength="19" class="modern-input">
+                <div class="card-icons">
+                    <img src="~/logo/visa.png" alt="Visa" loading="lazy">
+                    <img src="~/logo/mastercard.png " alt="Mastercard" loading="lazy">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>Son Kullanma Tarihi</label>
+                <input type="text" placeholder="AA/YY" pattern="\d{2}/\d{2}"
+                       class="modern-input">
+            </div>
+            <div class="form-group">
+                <label>CVV <i class="fas fa-question-circle help-icon"></i></label>
+                <input type="password" placeholder="•••" maxlength="3" pattern="\d*"
+                       class="modern-input">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Kart Üzerindeki İsim</label>
+            <input type="text" placeholder="Ad Soyad" class="modern-input">
+        </div>
+
+        <div class="save-card">
+            <input type="checkbox" id="saveCard">
+            <label for="saveCard">Kart bilgilerimi güvenli sakla</label>
+        </div>
+    </form>
+</div>
+
+<!-- PayPal Formu -->
+<div id="paypal" class="tab-content">
+    <div class="paypal-content">
+        <img src="~/logo/paypal.png" alt="PayPal" class="paypal-logo">
+        <div class="form-group">
+            <label>PayPal Numaranız (10 haneli)</label>
+            <input type="text" placeholder="PayPal numarası" pattern="\d{10}" maxlength="10"
+                   class="modern-input paypal-input">
+        </div>
+    </div>
+</div>
+
+<!-- Apple Pay Formu -->
+<div id="apple-pay" class="tab-content">
+    <div class="apple-pay-content">
+        <img src="~/logo/apay.png" alt="Apple Pay" class="apple-pay-logo">
+        <div class="form-group">
+            <label>Apple Pay Numaranız (10 haneli)</label>
+            <input type="text" placeholder="Apple Pay numarası" pattern="\d{10}" maxlength="10"
+                   class="modern-input apple-pay-input">
+        </div>
+    </div>
+</div>
