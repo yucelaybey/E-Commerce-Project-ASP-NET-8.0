@@ -5,6 +5,16 @@
 
 ## ANASAYFA BÖLÜMÜ :
 
+### Giriş - Kayıt - Şifre Yenileme:
+![GirişYap](https://github.com/user-attachments/assets/3c3bca4e-ec50-4fa2-84aa-90f3ad344573)
+![Kayıt Ol](https://github.com/user-attachments/assets/5fa19373-0013-41c0-8c2d-d663efef2090)
+![Kayıt Ol2](https://github.com/user-attachments/assets/0c15f687-bb28-4aed-8c6a-c5b467711d15)
+![PasswordEmailCodepng](https://github.com/user-attachments/assets/58436944-08bb-4651-8b44-d723ee3d1484)
+![MailEkranı](https://github.com/user-attachments/assets/076e9620-90f8-47d9-a3a8-1461cea3e5ba)
+![PasswordReset](https://github.com/user-attachments/assets/baec36a4-62c4-4a11-bd18-d2b99bc96419)
+![NewPassword](https://github.com/user-attachments/assets/fd663fda-8e6a-4a20-876c-85db1e438359)
+![NewPassword2](https://github.com/user-attachments/assets/3117a796-4e7e-43e9-abb9-e8f073f5d810)
+
 ### Anasayfa:
 ![Anasayfa1](https://github.com/user-attachments/assets/d0d158e4-2179-400b-bb24-e4d2a61cd522)
 ![Anasayfa2](https://github.com/user-attachments/assets/798876b1-b857-4a4e-af8d-f12f59eb7267)
@@ -20,137 +30,57 @@
 ![Kategori2](https://github.com/user-attachments/assets/087db97c-351b-4fd5-972e-cdc73dcbaa78)
 ![Kategori3](https://github.com/user-attachments/assets/cce21dda-50ce-4853-a98d-252dec813836)
 
-### Otelimizi Daha Yakından Tanıyın:
-![Otelimizi Daha iyi tanıyın](https://github.com/user-attachments/assets/eb73b639-6f01-4805-b04d-dfe989348bd9)
+### Ürün Arama:
+![Search](https://github.com/user-attachments/assets/060b53fb-dedb-4cc6-8c7e-0f676152635a)
 
-### Hizmetlerimiz:
-![anasayfa hizmetlerimiz](https://github.com/user-attachments/assets/e7900d65-8a95-4334-887b-691fd14d8634)
+### Favoriler:
+![Favoriler](https://github.com/user-attachments/assets/a0a00277-f159-42e0-978c-dc520c0af34a)
+![Favoriler2](https://github.com/user-attachments/assets/1246510d-0aed-4ab8-995f-1ea4de78e365)
+![Favoriler3](https://github.com/user-attachments/assets/fd606170-2ae8-4000-9234-1641e2b69790)
 
-### Referanslar:
-![Anasayfa referanslar](https://github.com/user-attachments/assets/361d4f1a-4745-4e78-b65c-fd669283696f)
+### Trendler:
+![trendler1](https://github.com/user-attachments/assets/7ce2d106-6ce0-4e9e-8c85-1b819ce72566)
+![trendler2](https://github.com/user-attachments/assets/d3b61d26-0785-48aa-9aa0-e752b8eaedb1)
 
-### Ekip Arkadaşlarımız:
-![Ekip arkadaşlarımız](https://github.com/user-attachments/assets/4d7bb322-d2ca-4b09-8910-be76327743db)
+### Hesabım - Siparişlerim:
+![Hesabım1](https://github.com/user-attachments/assets/719e227b-82c3-44e3-a028-a1277793ce3b)
+![Hesabım2](https://github.com/user-attachments/assets/da01c6e2-d811-4241-8070-63853b782750)
+![Siparişlerim](https://github.com/user-attachments/assets/3a57d687-1f43-4604-b553-b66a392b0052)
 
-### Mail Bülteni:
-![Mail Bülteni ve footer kısmı](https://github.com/user-attachments/assets/1ad88984-7b01-4d9a-815c-dfbbc922d142)
+### Sepet - Ödeme - Sipariş Sonu:
+![sepet1](https://github.com/user-attachments/assets/9dfd0ab9-5e24-478e-be87-02e67720faee)
+![sepet2](https://github.com/user-attachments/assets/7e60fa61-ee3d-49c9-8930-209be0f5a47b)
+![sepet3](https://github.com/user-attachments/assets/37082331-f8df-4ede-8a3c-06b221463f70)
+![sepet4](https://github.com/user-attachments/assets/1889b550-de31-4d9a-a736-be7ae1983bcb)
+![OdemePlanı](https://github.com/user-attachments/assets/004e3789-a565-41a5-a5b0-a297d8f4d5d8)
+![SiparişOkey](https://github.com/user-attachments/assets/2b54ceae-392d-4b31-82f5-73b76599451a)
+![SiparişOkey2](https://github.com/user-attachments/assets/8facf2d5-ba61-412a-ab65-dcf06c9907b3)
 
+### Yardım:
+![Yardim](https://github.com/user-attachments/assets/0ad0b921-a344-46e1-bffc-b44ee61c8057)
+![Yardim2](https://github.com/user-attachments/assets/8d44bec7-181e-4c63-a628-005c6c41557e)
 
+### MOBİL UYUMLU OLDUĞUNA DAİR BAZI ÖRNEKLER:
+![Anasayfa](https://github.com/user-attachments/assets/f5b6a0c9-85c6-40df-9907-1b2ca48b9a10)
+![Favoriler](https://github.com/user-attachments/assets/c7fd5f3b-b671-49e9-a854-5f7934410a4e)
+![Hesabım](https://github.com/user-attachments/assets/594ea9a2-6cb2-4663-bb9b-ce472a8f83ee)
+![Siparişlerim](https://github.com/user-attachments/assets/afd82fff-19ab-4ff3-890b-9773dcee2ef2)
+![Sepet](https://github.com/user-attachments/assets/3015e910-500f-46f8-8d42-5a85aebbebc2)
+![SiparişSon](https://github.com/user-attachments/assets/07a492fd-8070-46a6-a8df-c496fd25e742)
 
-## REZERVASYON BÖLÜMÜ :
+## ADMİN BÖLÜMÜ :
 
-### Rezervasyon -1:
-![rezervasyon1](https://github.com/user-attachments/assets/d675ab1c-b306-43c7-a4ca-11c150b25848)
+### Admin Anasayfa:
+![AdminAnasayfa](https://github.com/user-attachments/assets/ca60a142-5309-40e8-86d4-51294f7215c6)
 
-### Rezervasyon -2:
-![rezervasyon2](https://github.com/user-attachments/assets/cfce20d1-dfa3-46b0-9d96-54d7048ac949)
+### Admin Kategoriler:
+![AdminKategori](https://github.com/user-attachments/assets/5965e84c-d1df-4fc6-9331-2dbbf37a387e)
 
-### Rezervasyon -3:
-![rezervasyon3](https://github.com/user-attachments/assets/faf087be-098d-4fb1-af6b-40cd45e4c9e0)
+### Admin Ürünler:
+![AdminÜrünler](https://github.com/user-attachments/assets/498208f4-dfd4-4286-9471-4e0c8d58791e)
 
-
-
-## ODALAR BÖLÜMÜ :
-
-### Odalar -1:
-![oda 1](https://github.com/user-attachments/assets/5cd5134f-cd1b-45c5-8d0b-af9a89278bd0)
-
-### Odalar -2:
-![oda 2](https://github.com/user-attachments/assets/b159bba3-923f-4c11-aae1-29da71de1a9e)
-
-### Odalar -3:
-![oda 3](https://github.com/user-attachments/assets/10494f40-adb7-4ce1-90e1-9760492b2401)
-### Odalar -4:
-
-![oda 4](https://github.com/user-attachments/assets/216116d9-55a4-4cfa-aec6-892956959922)
-
-### Odalar -5:
-![oda 5](https://github.com/user-attachments/assets/98be09eb-3b33-46ce-828b-421e6c33cdfe)
-
-
-
-## İLETİŞİM BÖLÜMÜ :
-
-### İletişim -1:
-![İletişim 1](https://github.com/user-attachments/assets/3cf03cff-0270-418c-a9b6-7a577a30ff5f)
-
-### İletişim -2:
-![İletişim 2](https://github.com/user-attachments/assets/3fdc1b89-46f1-4516-a16d-0438eabdc905)
-
-### İletişim -3:
-![İletişim 3](https://github.com/user-attachments/assets/5b7336da-db3c-4b83-8d52-30f747147ac4)
-
-
-
-## GİRİŞ YAP - KAYIT OL BÖLÜMÜ :
-
-### Giriş Yap:
-![Giriş Yap](https://github.com/user-attachments/assets/56b8c772-aaf9-48f2-9e39-f8ac56f007a4)
-
-### Kayıt Ol:
-![Kayıt Ol](https://github.com/user-attachments/assets/72d9ddd1-a2d9-4a38-abf2-fdc036466858)
-
-
-# ADMIN PANEL BÖLÜMÜ :
-
-### Anasayfa :
-![admin_mainpage](https://github.com/user-attachments/assets/ba1d150c-1908-4c7c-a6b9-3fef6840e744)
-
-### Rezervasyonlar (Listeleme-Düzenleme-Silme):
-![Admin_bookingpage](https://github.com/user-attachments/assets/69c21f6d-93e3-4c42-8580-5cd0f3360693)
-
-### Personeller (Listeleme-Düzenleme-Silme):
-![admin_personalpage](https://github.com/user-attachments/assets/c1af2e71-aa0b-415e-880f-2c24f35ffb27)
-
-### Referanslar (Listeleme-Düzenleme-Silme):
-![Admin_referancepage](https://github.com/user-attachments/assets/839e37e3-91ff-45f3-a44a-aaae5477c93c)
-
-### Hizmetler (Listeleme-Düzenleme-Silme):
-![Admin_Servicespage](https://github.com/user-attachments/assets/0de6138c-0b78-4463-857b-571030aa560a)
-
-### Hakkımızda (-Düzenleme):
-![Admin_aobutpage](https://github.com/user-attachments/assets/55c7d8bd-2ba2-4822-8f8c-7bcca0da6e6b)
-
-### Odalar (Listeleme-Düzenleme-Silme):
-![Admin_Roomspage](https://github.com/user-attachments/assets/5f79f60d-0dce-4943-a6ec-369f84739b5a)
-
-### Müşteriler (Listeleme-Düzenleme-Silme):
-![Admin_Custormerspage](https://github.com/user-attachments/assets/69fb5f72-a428-4b35-b747-5563a56c954a)
-
-### Mesajlar - Gelen Kutusu:
-![Admin_ContactBox](https://github.com/user-attachments/assets/99728e3c-6dec-451a-9e8d-86b83594dc54)
-
-### Mesajlar - Giden Kutusu:
-![Admin_GidenKutusu](https://github.com/user-attachments/assets/631f54cb-a689-4349-a3aa-8abf2838c530)
-
-### Mail Gönderme:
-![Admin_SendMessage](https://github.com/user-attachments/assets/9033de5a-f697-43e4-8db5-d840c5b6eaea)
-
-### Mailde Görüntüleme:
-![Gönderilen mesajın mail sayfası](https://github.com/user-attachments/assets/1885723f-84d7-484b-9c4a-1a007a5e30a3)
-
-### Resim Yükleme:
-![Admin_ResimYukleme](https://github.com/user-attachments/assets/febc2eb3-cd8f-4a24-bdb8-9efa43a055d3)
-
-### Dosya Yükleme:
-![Admin_Dosya Yükleme](https://github.com/user-attachments/assets/2c6bc95e-a6af-4a37-ba3c-94c6ec5de682)
-
-### Kullanıcılar (Üyeler) (Listeleme):
-![Admin_Users](https://github.com/user-attachments/assets/10ae3c22-f9a4-4920-a3fb-1d2ce39d5a93)
-
-### Otel Lokasyonları (Listeleme-Düzenleme-Silme):
-![Admin_OtelLocation](https://github.com/user-attachments/assets/a47cec56-e0b5-418e-bc33-a41e449c1ac5)
-
-### Roller (Listeleme-Düzenleme-Silme):
-![Admin_RolePage](https://github.com/user-attachments/assets/0c6369a3-7c62-4757-9674-f0bb395c3152)
-
-### Rol Atama (Listeleme-Düzenleme-Silme):
-![Admin_RoleChange](https://github.com/user-attachments/assets/e06c896f-83db-4541-996f-e213e464c1c8)
-
-### Profil Bilgilerini Görüntüleme ve Güncelleme (Listeleme-Düzenleme-Silme):
-![Admin Profil Bilgileri ve şifreyi güncelle](https://github.com/user-attachments/assets/82b208f9-30ef-4255-8dbc-6309cb17acd3)
-
-
+### Admin Siparişler:
+![AdminSiparişler](https://github.com/user-attachments/assets/8db68508-3323-4110-b219-d341f15051e6)
 
 # API BÖLÜMÜ :
 
