@@ -88,11 +88,10 @@
 
 
 ## Eklenenler :
-* Otel Rezervasyon sayfasının neredeyse tamamı dinamik hale getirilmiştir.
-* Admin sayfasından tüm verileri kolaylıkla listeleyip istediğimizi silebilir ayrıca kendi verilerinizi ekleyebilirsiniz.
+* Neredeyse herşey dinamik hale getirildi.
+* Admin sayfasında kargo takipten ürün iptale kadar herşey eklenebilir halde.
 * Admin paneline login olmadan admin paneline erişemezsiniz ve bunu denerseniz otomatik olarak login ekranına yönlendiriliyorsunuz.
 * Website içeriğini merak ediyorsanız, neleri ekleyebiliyoruz neleri silebiliriz diyorsanız eğer resimlere ve giflere göz atınız.
-* Admin Panel kısmı çok zengin bir içeriğe sahiptir.
 * Bu projenin asıl amacı birçok teknolojiyi öğrenmeyi amaçlamıştır. kullanılan teknolojiler aşağıda mevcuttur.
 
 ## Website Yaparken Kullandığım Teknolojiler:
@@ -103,19 +102,17 @@
 * Entity Framework Core
 * MSSQL
 * X.PagedList ile Pagination İşlemleri
-* Fluent Validation
-* N Tier Architecture
+* Onion Architecture
+* Repositories Design Pattern
+* Mediator Design Pattern
 * Swagger
 * Postman
 * Api Consume
-* Rapid Api
 * Json Web Token
 * Login
 * Register
 * DTO Layer
 * Mvc
 * Deploy
-* Repository Design Pattern
 * MailKit ile Mail Gönderme İşlemleri
-* Rezervasyon İşlemleri
 * Tüm CRUD İşlemleri
