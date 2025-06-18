@@ -5,18 +5,20 @@
 
 ## ANASAYFA BÖLÜMÜ :
 
-
 ### Anasayfa:
 ![Anasayfa1](https://github.com/user-attachments/assets/d0d158e4-2179-400b-bb24-e4d2a61cd522)
 ![Anasayfa2](https://github.com/user-attachments/assets/798876b1-b857-4a4e-af8d-f12f59eb7267)
 ![AnasayfaSidebar](https://github.com/user-attachments/assets/fdd09a2f-5cff-42b9-8eac-1b96e9c0ac7f)
-
+![giriş yapmadan kişisel sayfalara erişme hatası](https://github.com/user-attachments/assets/de496709-89e5-471d-bf4a-10f4c63bed6b)
 
 ### Kategoriler:
-![hotelier hakkında orta](https://github.com/user-attachments/assets/6c220eea-52a1-421a-9b89-e1579f31e5b3)
+![tümkategoriler1](https://github.com/user-attachments/assets/7d643537-2660-46d4-add3-29cdafb88c0f)
+![tümkategoriler2](https://github.com/user-attachments/assets/764e2526-cdec-438c-ac6f-a42a0dccae5c)
 
-### Odalarımız:
-![hotelieranasayfa odalar](https://github.com/user-attachments/assets/1242ed42-b43e-4933-af95-bf946d64b85d)
+### Kategori Ürünleri:
+![Kategori1](https://github.com/user-attachments/assets/5d6d4aa0-1f71-4b73-b37a-a33c74b41ab9)
+![Kategori2](https://github.com/user-attachments/assets/087db97c-351b-4fd5-972e-cdc73dcbaa78)
+![Kategori3](https://github.com/user-attachments/assets/cce21dda-50ce-4853-a98d-252dec813836)
 
 ### Otelimizi Daha Yakından Tanıyın:
 ![Otelimizi Daha iyi tanıyın](https://github.com/user-attachments/assets/eb73b639-6f01-4805-b04d-dfe989348bd9)
