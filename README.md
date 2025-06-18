@@ -83,70 +83,8 @@
 ![AdminSiparişler](https://github.com/user-attachments/assets/8db68508-3323-4110-b219-d341f15051e6)
 
 # API BÖLÜMÜ :
+![localhost_7026_swagger_index html (2)](https://github.com/user-attachments/assets/f6d2125c-7ed2-492d-8482-0f524e890a8d)
 
-### API -1 :
-![Api - 1](https://github.com/user-attachments/assets/65164fc7-1e2a-4df4-a2ed-0975044544b0)
-
-### API -2 :
-![Api - 2](https://github.com/user-attachments/assets/a1268ac6-1906-4faa-9099-b721851b4660)
-
-### API -3 :
-![Api - 3](https://github.com/user-attachments/assets/bea3c185-c20a-408d-8a59-b89b1789f6ea)
-
-### API -4 :
-![Api - 4](https://github.com/user-attachments/assets/ea3483a8-a7f7-4d9a-b87f-50fba805304c)
-
-### API -5 :
-![Api - 5](https://github.com/user-attachments/assets/7b200cc4-6590-4ed2-843a-ff0e71aa2bed)
-
-### API -6 :
-![Api - 6](https://github.com/user-attachments/assets/c8a0811a-d462-41b2-8494-7c3c0c08a136)
-
-### API -7 :
-![Api - 7](https://github.com/user-attachments/assets/8f855ca0-bf19-4198-931b-c7ff65b2ff66)
-
-
-# GIF BÖLÜMÜ :
-
-### Admin Panelde Hızlı Tur (Aşağıda gif yoksa bekleyin internet hızınıza bağlı yüklenecektir):
-![Ekran+Kaydı+2024-09-08+184328](https://github.com/user-attachments/assets/3f66f046-302b-4618-970b-fe8a387181ca)
-
-
-
-
-# RAPİD APİ BÖLÜMÜ :
-
-### IMDB'den PUANA GÖRE TOP 100 FILM LİSTELEME :
-![imdbtop100List](https://github.com/user-attachments/assets/ba5df01b-f2d9-4f18-97a2-ce419738a93f)
-
-### 1 TL'nin DİĞER PARA BİRİMLERİNE GÖRE KUR KARŞILIĞINI LİSTELEME :
-![dovizkur hesaplama](https://github.com/user-attachments/assets/75ea8cf6-c794-4255-bee6-b324c8bbd81e)
-
-### RAPİD API ŞEHİR ID'si BULMA (ANKARA) :
-![RapidAPI Şehir adından şehir idsi bulma ](https://github.com/user-attachments/assets/e56624d1-8bac-4329-864a-f565ef778f67)
-
-### RAPİD API ŞEHİR ID'si İLE OTEL ARAMA (ANKARA) :
-![RapidAPI Otel arama test](https://github.com/user-attachments/assets/bc8b067c-3a15-4ddf-9f16-c01f3f329fca)
-
-### ANKARA İÇİN OTEL LİSTELEME :
-![HotelList](https://github.com/user-attachments/assets/bb9910a6-fa45-412b-83f2-41189192a298)
-
-### BUDAPEŞTE İÇİN ŞEHİR İD'si BULMA :
-![Budapest için şehir idsini bulma](https://github.com/user-attachments/assets/98db918d-03ee-4339-89d2-09ab019088af)
-
-### ŞEHİR ID'si İLE BUDAPEŞTE de OTEL ARAMA :
-![ŞehirIDsine göre Otel Arama](https://github.com/user-attachments/assets/5db012b1-822f-4363-b04e-bfd9828c5035)
-
-
-
-
-# SON :
-
-### Projeden Kullanılanlar
-![1](https://github.com/user-attachments/assets/dd84b09d-74b8-4bf7-9981-6565051874e6)
-
-### Projeden Kullanılanlar (Devamı-):
-![2](https://github.com/user-attachments/assets/f9c15431-d737-4254-9090-fbab77890a6c)
 
 
 ## Eklenenler :
