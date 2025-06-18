@@ -9,9 +9,9 @@
 ![GirişYap](https://github.com/user-attachments/assets/3c3bca4e-ec50-4fa2-84aa-90f3ad344573)
 ![Kayıt Ol](https://github.com/user-attachments/assets/5fa19373-0013-41c0-8c2d-d663efef2090)
 ![Kayıt Ol2](https://github.com/user-attachments/assets/0c15f687-bb28-4aed-8c6a-c5b467711d15)
-![PasswordEmailCodepng](https://github.com/user-attachments/assets/58436944-08bb-4651-8b44-d723ee3d1484)
-![MailEkranı](https://github.com/user-attachments/assets/076e9620-90f8-47d9-a3a8-1461cea3e5ba)
 ![PasswordReset](https://github.com/user-attachments/assets/baec36a4-62c4-4a11-bd18-d2b99bc96419)
+![MailEkranı](https://github.com/user-attachments/assets/076e9620-90f8-47d9-a3a8-1461cea3e5ba)
+![PasswordEmailCodepng](https://github.com/user-attachments/assets/58436944-08bb-4651-8b44-d723ee3d1484)
 ![NewPassword](https://github.com/user-attachments/assets/fd663fda-8e6a-4a20-876c-85db1e438359)
 ![NewPassword2](https://github.com/user-attachments/assets/3117a796-4e7e-43e9-abb9-e8f073f5d810)
 
